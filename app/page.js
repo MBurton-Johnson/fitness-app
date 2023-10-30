@@ -1,5 +1,5 @@
 import React from 'react';
-import NutritionPage from '../src/pages/NutritionPage/NutritionPage';
+import NutritionPage from './nutrition/NutritionPage';
 
 export default function Home() {
   return (
