@@ -2,19 +2,22 @@ import React, { useState } from "react";
 // import '../WorkoutDetails/WorkoutDetailsModal.css';
 import "./AddWorkoutModal.css";
 import { addWorkoutToDatabase } from "./AddWorkoutContext.js";
+import { useSession } from "next-auth/react";
+import { useParams } from "next/navigation";
 
 
 
-export default function AddWorkoutModal({ onClose, session }) {
+
+export default function AddWorkoutModal({ onClose }) {
+  const { id } = useParams(); // Access id from the URL using useParams
+  const { data: session } = useSession(); // Access the user session using useSession
+
   const [workoutName, setWorkoutName] = useState("");
   const [exercises, setExercises] = useState([]);
   const [cardioType, setCardioType] = useState("");
   const [durationMinutes, setDurationMinutes] = useState("");
   const [distance, setDistance] = useState("");
   const [isAddingCardio, setIsAddingCardio] = useState(false);
-
-
-
 
   const handleAddExercise = () => {
     // Add a new exercise to the exercises array
