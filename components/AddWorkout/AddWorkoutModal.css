@@ -54,16 +54,43 @@ AddWorkoutModal.css
   .cardio-section label {
     display: block;
   }
-  .exercises-section label {
-    display: flex;
-    align-items: center;
-  }
-  
-  .exercises-section label input {
-    flex: 1;
-    padding: 5px;
-    margin-left: 10px;
-  }
+
+  /* Add this CSS to your existing styles */
+
+.exercises-section label {
+  display: block;
+}
+
+.exercises-section label input {
+  width: 100%; /* Change this to your desired width */
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.exercises-section .exercise-info {
+  /* display: flex;
+  align-items: column; */
+  margin-top: 5px;
+}
+
+.exercises-section .exercise-info label {
+  width: 100%; /* Set the desired width for each field */
+}
+
+.exercises-section .exercise-info input {
+  width: 100%; /* Set the desired width for each field */
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-left: 0; /* Reset margin-left to align with the labels */
+}
+.sets-reps-weight {
+  display: flex;
+}
+ 
   
   button {
     background-color: #007bff;
@@ -72,6 +99,8 @@ AddWorkoutModal.css
     border-radius: 3px;
     padding: 5px 10px;
     cursor: pointer;
+    margin-top: 10px;
+
   }
   
   button:hover {
