@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { useRouter } from 'next/navigation';
 
+
 // Modal.setAppElement('#__next'); // For accessibility purposes with react-modal
 
 export default function Nutrition() {
+
     const router = useRouter();  // <-- Initialize the useRouter hook
     const userId = router.query?.id; // <-- Destructure the userId from the router's query object
-   
     const [foods, setFoods] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [currentFood, setCurrentFood] = useState({});
@@ -53,6 +54,8 @@ export default function Nutrition() {
                 // Refetch or update state directly to reflect changes
             });
         } else {
+            fetch('http://localhost:3006/foods/new', {
+
             fetch(`http://localhost:3006/foods/new/${userId}`, {
                 method: 'POST',
                 headers: {
