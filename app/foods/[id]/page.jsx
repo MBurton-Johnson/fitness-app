@@ -2,22 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { useRouter } from 'next/navigation';
+
 
 // Modal.setAppElement('#__next'); // For accessibility purposes with react-modal
 
 export default function Nutrition() {
+
+    const router = useRouter();  // <-- Initialize the useRouter hook
+    const userId = router.query?.id; // <-- Destructure the userId from the router's query object
     const [foods, setFoods] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [currentFood, setCurrentFood] = useState({});
     const [foodType, setFoodType] = useState(null);  // 'breakfast', 'lunch', 'dinner', 'snack'
 
-
     useEffect(() => {
-        // Fetch the foods data here
-        fetch('/foods?userId=YOUR_USER_ID')
-            .then(res => res.json())
-            .then(data => setFoods(data));
-    }, []);
+        // Only fetch data if userId is available (router.query might be empty on initial render)
+        if (userId) {
+            fetch(`/foods?userId=${userId}`)  // <-- Replace placeholder with userId from URL
+                .then(res => res.json())
+                .then(data => setFoods(data));
+        }
+    }, [userId]); 
 
     const handleOpenModal = (type, food = {}) => {
         setFoodType(type);
@@ -49,6 +55,8 @@ export default function Nutrition() {
             });
         } else {
             fetch('http://localhost:3006/foods/new', {
+
+            fetch(`http://localhost:3006/foods/new/${userId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
