@@ -29,28 +29,32 @@ export default function UserInfo() {
     if (status === "authenticated") {
         return (
             <div className="shadow-xl p-8 rounded-md flex flex-col gap-3 bg-yellow-200">
-              <div className="flex items-center justify-center">
-                <Image className="rounded-full" src={session?.user?.image} width={60} height={60} />
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-lg">{session?.user?.name}</div>
-                <div>Email: <span className="font-bold">{session?.user?.email}</span></div>
-                {userData && (
-                  <div className="mt-4">
-                    <div>Gender: <span className="font-bold">{userData.gender}</span></div>
-                    <div>Age: <span className="font-bold">{userData.age}</span></div>
-                    <div>Height: <span className="font-bold">{userData.height}cm</span></div>
-                    <div>Weight: <span className="font-bold">{userData.weight}KG</span></div>
-                    <div className="mt-2">
-                      <Link className="font-bold text-lg text-blue-700 block" href={`/profile/create/${userData._id}`}>Create Profile</Link>
-                      <Link className="font-bold text-lg text-blue-700 block" href={`/workouts/${userData._id}`}>Workout</Link>
-                    </div>
-                  </div>
-                )}
-              </div>
+                <div className="flex items-center justify-center">
+                    <Image className="rounded-full" src={session?.user?.image} width={60} height={60} />
+                </div>
+                <div className="text-center">
+                    <div className="font-bold text-lg">{session?.user?.name}</div>
+                    <div>Email: <span className="font-bold">{session?.user?.email}</span></div>
+                    {userData && userData.gender && userData.age && userData.height && userData.weight ? (
+                        <div className="mt-4">
+                            <div>Gender: <span className="font-bold">{userData.gender}</span></div>
+                            <div>Age: <span className="font-bold">{userData.age}</span></div>
+                            <div>Height: <span className="font-bold">{userData.height}cm</span></div>
+                            <div>Weight: <span className="font-bold">{userData.weight}KG</span></div>
+                            <div className="mt-2">
+                                <Link className="font-bold text-lg text-blue-700 block" href={`/profile/create/${userData._id}`}>Update Profile</Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="mt-2">
+                            <Link className="font-bold text-lg text-blue-700 block" href={`/profile/create/${userData?._id}`}>Create Profile</Link>
+                        </div>
+                    )}
+                </div>
             </div>
-          );
+        );
     } else {
         return <SignInBtn />;
     }
 }
+
