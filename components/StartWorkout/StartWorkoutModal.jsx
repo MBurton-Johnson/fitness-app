@@ -14,11 +14,16 @@ export default function StartWorkoutModal({ workout, onClose }) {
       <div className="modal-content">
         <h2>Start Workout</h2>
         <p>Workout Name: {editedWorkout.workoutName}</p>
-        <div className="exercise-details">
-          <h3>Exercise Details:</h3>
+        <p>Date: <input type="date" value={editedWorkout.workoutDate} onChange={(e) => setEditedWorkout({ ...editedWorkout, workoutDate: e.target.value })} /></p>
+
+        <div className="exercise-section">
+          {/* <h3>Exercise Details:</h3> */}
           {editedWorkout.exercises.map((exercise, index) => (
-            <div key={index} className="exercise">
-              <p>Exercise Name: {exercise.exerciseName}</p>
+            <div key={index} className="exercise-info">
+              <div className="exercise-name-row">
+              <p> {exercise.exerciseName}</p>
+              </div>
+              <div className="sets-reps-weight">
               <p>Sets: <input type="number" value={exercise.sets} onChange={(e) => {
                 const newExercises = [...editedWorkout.exercises];
                 newExercises[index].sets = parseInt(e.target.value);
@@ -34,15 +39,19 @@ export default function StartWorkoutModal({ workout, onClose }) {
                 newExercises[index].weight = parseInt(e.target.value);
                 setEditedWorkout({ ...editedWorkout, exercises: newExercises });
               }} /></p>
+</div>
             </div>
           ))}
         </div>
         <h3>Cardio:</h3>
-        <div className="cardio">
-          <p>Date: <input type="date" value={editedWorkout.workoutDate} onChange={(e) => setEditedWorkout({ ...editedWorkout, workoutDate: e.target.value })} /></p>
+        <div className="cardio-section">
+          <div className="cardion-info">
           <p>Cardio Type: <input type="text" value={editedWorkout.cardio ? editedWorkout.cardio.cardioType : ''} onChange={(e) => setEditedWorkout({ ...editedWorkout, cardio: { ...editedWorkout.cardio, cardioType: e.target.value } })} /></p>
+          </div>
+          <div className="duration-distance">
           <p>Duration (Minutes): <input type="number" value={editedWorkout.cardio ? editedWorkout.cardio.durationMinutes : 0} onChange={(e) => setEditedWorkout({ ...editedWorkout, cardio: { ...editedWorkout.cardio, durationMinutes: e.target.value } })} /></p>
           <p>Distance: <input type="number" value={editedWorkout.cardio ? editedWorkout.cardio.distance : 0} onChange={(e) => setEditedWorkout({ ...editedWorkout, cardio: { ...editedWorkout.cardio, distance: e.target.value } })} /></p>
+          </div>
         </div>
         <button onClick={handleSave}>Finish Workout</button>
         <button onClick={onClose}>Cancel</button>
