@@ -1,10 +1,15 @@
+'use client';
+
+import { useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 
 export async function addWorkoutToDatabase(requestData) {
-
+const { id } = useParams()
 
     if (requestData.method === 'POST') {
       const { workoutName, exercises, cardio } = requestData.body;
+      // const id = req.params.id
       
 
   
@@ -13,6 +18,7 @@ export async function addWorkoutToDatabase(requestData) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          
         },
         body: JSON.stringify({ workoutName, exercises, cardio }),
       });
