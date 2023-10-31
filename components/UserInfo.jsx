@@ -44,6 +44,7 @@ export default function UserInfo() {
                     <div className="mt-2">
                       <Link className="font-bold text-lg text-blue-700 block" href={`/profile/create/${userData._id}`}>Create Profile</Link>
                       <Link className="font-bold text-lg text-blue-700 block" href={`/workouts/${userData._id}`}>Workout</Link>
+                      <Link className="font-bold text-lg text-blue-700 block" href={`/foods/${userData._id}`}>Nutrition</Link>
                     </div>
                   </div>
                 )}
