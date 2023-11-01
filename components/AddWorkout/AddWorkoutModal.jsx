@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // import '../WorkoutDetails/WorkoutDetailsModal.css';
 import "./AddWorkoutModal.css";
 import { addWorkoutToDatabase } from "./AddWorkoutContext.js";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 
-
-
-
 export default function AddWorkoutModal({ onClose }) {
-  const { id } = useParams(); // Access id from the URL using useParams
-  const { data: session } = useSession(); // Access the user session using useSession
-
+  // require('react-dom');
+  // window.React2 = require('react');
+  // console.log(window.React1 === window.React2);
+  // const { data: session } = useSession(); 
+  const { id } = useParams();
   const [workoutName, setWorkoutName] = useState("");
   const [exercises, setExercises] = useState([]);
   const [cardioType, setCardioType] = useState("");
-  const [durationMinutes, setDurationMinutes] = useState("");
-  const [distance, setDistance] = useState("");
+  // const [durationMinutes, setDurationMinutes] = useState("");
+  // const [distance, setDistance] = useState("");
   const [isAddingCardio, setIsAddingCardio] = useState(false);
 
   const handleAddExercise = () => {
@@ -34,15 +33,13 @@ export default function AddWorkoutModal({ onClose }) {
   const handleSave = async () => {
     // Create a new workout object
     const newWorkout = {
-  
-
       workoutName,
       exercises,
       cardio: isAddingCardio
         ? {
             cardioType,
-            durationMinutes,
-            distance,
+            // durationMinutes,
+            // distance,
           }
         : null,
     };
@@ -52,7 +49,7 @@ export default function AddWorkoutModal({ onClose }) {
       const response = await addWorkoutToDatabase({
         method: "POST",
         body: newWorkout,
-      });
+      }, id);
 
       if (response.workout === null) {
         console.log("Workout saved successfully");
