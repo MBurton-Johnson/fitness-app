@@ -1,0 +1,79 @@
+h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 5px;  /* Adjusted margin-bottom */
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.add-button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+    margin: 20px 0;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-button:hover {
+    background-color: #0051a1;
+}
+
+.food-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.food-item h3 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.food-item button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    background-color: #ccc;
+    color: #333;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.food-item button:hover {
+    background-color: #aaa;
+}
+
+.meal-section {
+    border: 1px solid #eaeaea;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.meal-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
