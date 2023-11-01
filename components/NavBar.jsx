@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function NavBar() {
   const { status, data: session } = useSession();
   const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -48,6 +49,14 @@ export default function NavBar() {
             Foods
           </Link>
         )}
+        {status === "authenticated" && userData && (
+          <Link
+            className="font-bold text-lg text-blue-700"
+            href={`/calendar/${userData?._id}`}
+          >
+            Weight Tracker
+          </Link>
+        )}
         {status === "authenticated" ? (
           <button
             className="bg-slate-900 text-white px-6 py-2 rounded-md"
@@ -67,3 +76,5 @@ export default function NavBar() {
     </>
   );
 }
+
+
