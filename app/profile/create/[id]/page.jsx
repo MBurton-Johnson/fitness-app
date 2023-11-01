@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
 export default function createProfile() {
@@ -14,6 +14,35 @@ export default function createProfile() {
     height: "",
     weight: "",
   });
+
+  const [isWeightSet, setIsWeightSet] = useState(false);
+
+
+  useEffect(() => {
+    // Fetch user data here based on the 'id'
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3006/users/one/${id}`);
+        if (response.ok) {
+          const userData = await response.json();
+          setFormData({
+            gender: userData.gender || "Male", // Provide default value if it's undefined
+            age: userData.age || "",
+            height: userData.height || "",
+            weight: userData.weight || "",
+            goalWeight: userData.goalWeight
+          });
+          setIsWeightSet(!!userData.weight);
+        } else {
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [id]); 
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -34,7 +63,8 @@ export default function createProfile() {
 
       if (response.ok) {
         console.log("User updated successfully");
-        router.push('/')
+        setIsWeightSet(!!formData.weight)
+        router.push('/') 
       } else {
         console.error("Error updating user");
       }
@@ -97,6 +127,20 @@ export default function createProfile() {
           placeholder="Enter your weight"
           className="px-4 py-2 border border-gray-300 rounded-md"
           value={formData.weight}
+          onChange={handleInputChange}
+          disabled={isWeightSet}
+        />
+      </div>
+      <div className="flex flex-col mb-4">
+        <label htmlFor="weight" className="mb-2 font-semibold">
+          Target Weight
+        </label>
+        <input
+          id="goalWeight"
+          type="text"
+          placeholder="Enter your target weight"
+          className="px-4 py-2 border border-gray-300 rounded-md"
+          value={formData.goalWeight}
           onChange={handleInputChange}
         />
       </div>

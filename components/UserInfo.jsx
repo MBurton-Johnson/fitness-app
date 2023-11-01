@@ -2,13 +2,26 @@
 
 import Image from "next/image"
 import SignInBtn from "./SignInBtn";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from 'react';
 import Link from "next/link";
+import DeleteConfirmationModal from './DeleteConfirmationModal/DeleteConfirmationModal';
+import { useRouter } from 'next/navigation';
+
 
 export default function UserInfo() {
     const { status, data: session } = useSession();
     const [userData, setUserData] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const router = useRouter();
+
+    const handleOpenDeleteModal = () => {
+      setIsDeleteModalOpen(true);
+    };
+  
+    const handleCloseDeleteModal = () => {
+      setIsDeleteModalOpen(false);
+    };
 
     useEffect(() => {
         async function fetchUserData() {
@@ -26,6 +39,26 @@ export default function UserInfo() {
         }
     }, [status, session?.user?.email]);
 
+
+  const handleDeleteUser = async () => {
+    try {
+      const response = await fetch(`http://localhost:3006/users/${userData._id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('User deleted successfully');
+        setUserData(null)
+        await signOut()
+        router.push('/')
+      } else {
+        console.error('Error deleting user');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
     if (status === "authenticated") {
         return (
             <div className="shadow-xl p-8 rounded-md flex flex-col gap-3 bg-yellow-200">
@@ -40,10 +73,18 @@ export default function UserInfo() {
                             <div>Gender: <span className="font-bold">{userData.gender}</span></div>
                             <div>Age: <span className="font-bold">{userData.age}</span></div>
                             <div>Height: <span className="font-bold">{userData.height}cm</span></div>
-                            <div>Weight: <span className="font-bold">{userData.weight}KG</span></div>
+                            <div>Starting Weight: <span className="font-bold">{userData.weight}KG</span></div>
                             <div className="mt-2">
                                 <Link className="font-bold text-lg text-blue-700 block" href={`/profile/create/${userData._id}`}>Update Profile</Link>
                             </div>
+                            <div className="flex justify-center mt-5">
+                            <button onClick={handleOpenDeleteModal} className="font-bold text-lg text-red-700 block">Delete Profile</button>
+                            </div>
+                            <DeleteConfirmationModal
+                                isOpen={isDeleteModalOpen}
+                                onClose={handleCloseDeleteModal}
+                                onDelete={handleDeleteUser}
+                            />
                         </div>
                     ) : (
                         <div className="mt-2">
