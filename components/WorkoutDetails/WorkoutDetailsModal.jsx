@@ -26,6 +26,7 @@ export default function WorkoutModal({ workout, onClose }) {
       <div className="modal-content">
         <h2>Workout Details</h2>
         <p>{workout.workoutName}</p>
+        <h3>Last Performed: {workout.workoutDate ? workout.workoutDate : "Not yet performed"}</h3>
         {/* <h3>Exercises:</h3> */}
         <ul>
           {workout.exercises.map((exercise, index) => (

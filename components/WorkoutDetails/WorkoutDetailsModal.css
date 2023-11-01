@@ -19,15 +19,14 @@ WorkoutModal.css
     color: black;
   }
   
-  /* Add more styles as needed */
-  /* AddWorkoutModal.css */
+
   .modal-content {
     display: flex;
-    flex-direction: column; /* Display elements in a column layout */
-    gap: 10px; /* Add some spacing between elements */
+    flex-direction: column; 
+    gap: 10px; 
   }
   
-  /* Style the "Add Exercise" button */
+ 
   button {
     padding: 10px;
     background-color: #007BFF;
@@ -37,5 +36,5 @@ WorkoutModal.css
     cursor: pointer;
   }
   
-  /* Add more styles as needed */
+
   

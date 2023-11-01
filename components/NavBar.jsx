@@ -1,9 +1,7 @@
 "use client";
-
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-
 export default function NavBar() {
   const { status, data: session } = useSession();
   const [userData, setUserData] = useState(null);
@@ -20,12 +18,10 @@ export default function NavBar() {
         console.error("Error fetching user data:", error);
       }
     }
-
     if (status === "authenticated") {
       fetchUserData();
     }
   }, [status, session?.user?.email]);
-
   return (
     <>
       <div className="flex flex-col items-center mt-8">
@@ -80,4 +76,5 @@ export default function NavBar() {
     </>
   );
 }
+
 

@@ -1,12 +1,33 @@
 import React, { useState } from 'react';
+// import { updateWorkoutToDatabase } from "./StartWorkoutApi.jsx";
+// import { useParams } from "next/navigation";
+
 
 export default function StartWorkoutModal({ workout, onClose }) {
-  const [editedWorkout, setEditedWorkout] = useState(workout);
-
-  const handleSave = () => {
-    // Handle saving the edited workout details for starting the workout
-    console.log('Edited Workout for Starting Workout:', editedWorkout);
-    onClose(); // Close the StartWorkoutModal
+  // const { id } = useParams();
+  console.log(workout._id)
+  const [editedWorkout, setEditedWorkout] = useState({ ...workout });
+  const handleSave = async () => {
+    try {
+      // Call the updateWorkoutToDatabase function to update the workout
+      const response = await fetch(`http://localhost:3006/workouts/${workout._id}`, {
+        method: 'PUT',
+        headers: {
+        "Content-Type": "application/json",
+      "_id": workout._id
+      },
+      body: JSON.stringify({...editedWorkout}) 
+      },); // Pass the ID of the workout you want to update
+  
+      // Handle the response as needed (e.g., show a success message)
+      if (response.workout === null) {
+        console.log('Workout updated successfully');
+      }
+    } catch (error) {
+      console.error('Failed to update the workout:', error);
+    }
+    // Close the modal or perform other actions after saving the workout
+    onClose();
   };
 
   return (
