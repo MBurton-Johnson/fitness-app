@@ -13,6 +13,8 @@ export default function createProfile() {
     age: "",
     height: "",
     weight: "",
+    goalWeight: "",
+    goalCalories: "",
   });
 
   const [isWeightSet, setIsWeightSet] = useState(false);
@@ -30,7 +32,8 @@ export default function createProfile() {
             age: userData.age || "",
             height: userData.height || "",
             weight: userData.weight || "",
-            goalWeight: userData.goalWeight
+            goalWeight: userData.goalWeight || "",
+            goalCalories: userData.goalCalories || "",
           });
           setIsWeightSet(!!userData.weight);
         } else {
@@ -96,22 +99,24 @@ export default function createProfile() {
           Age
         </label>
         <input
-          id="age"
-          type="number"
-          placeholder="Enter your age"
-          className="px-4 py-2 border border-gray-300 rounded-md"
-          value={formData.age}
-          onChange={handleInputChange}
+        id="age"
+        type="number"
+        step="1"
+        placeholder="Age"
+        className="px-4 py-2 border border-gray-300 rounded-md"
+        value={formData.age}
+        onChange={handleInputChange}
         />
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="height" className="mb-2 font-semibold">
-          Height
+          Height (cm)
         </label>
         <input
           id="height"
-          type="text"
-          placeholder="Enter your height"
+          type="number"
+          step="0.01"
+          placeholder="Height (cm)"
           className="px-4 py-2 border border-gray-300 rounded-md"
           value={formData.height}
           onChange={handleInputChange}
@@ -119,12 +124,13 @@ export default function createProfile() {
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="weight" className="mb-2 font-semibold">
-          Weight
+          Weight (KG)
         </label>
         <input
           id="weight"
-          type="text"
-          placeholder="Enter your weight"
+          type="number"
+          step="0.01"
+          placeholder="Weight (KG)"
           className="px-4 py-2 border border-gray-300 rounded-md"
           value={formData.weight}
           onChange={handleInputChange}
@@ -133,14 +139,29 @@ export default function createProfile() {
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="weight" className="mb-2 font-semibold">
-          Target Weight
+          Target Weight (KG)
         </label>
         <input
           id="goalWeight"
-          type="text"
+          type="number"
+          step="0.01"
           placeholder="Enter your target weight"
           className="px-4 py-2 border border-gray-300 rounded-md"
           value={formData.goalWeight}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className="flex flex-col mb-4">
+        <label htmlFor="weight" className="mb-2 font-semibold">
+          Calory Goal for each day (kcal)
+        </label>
+        <input
+          id="goalCalories"
+          type="number"
+          step="1"
+          placeholder="Enter your target calories"
+          className="px-4 py-2 border border-gray-300 rounded-md"
+          value={formData.goalCalories}
           onChange={handleInputChange}
         />
       </div>

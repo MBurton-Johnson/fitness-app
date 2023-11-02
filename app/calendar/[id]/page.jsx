@@ -51,12 +51,13 @@ export default function createProfile() {
       <h1 className="text-3xl font-bold mb-6">Weight Tracker</h1>
       <div className="flex flex-col mb-4">
         <label htmlFor="weight" className="mb-2 font-semibold">
-          Weight
+          Weight (KG)
         </label>
         <input
           id="weight"
-          type="text"
-          placeholder="Enter your weight"
+          type="number"
+          step="0.01"
+          placeholder="Weight (KG)"
           className="px-4 py-2 border border-gray-300 rounded-md"
           value={formData.weight}
           onChange={handleInputChange}
