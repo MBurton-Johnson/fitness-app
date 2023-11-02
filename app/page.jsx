@@ -3,6 +3,9 @@
 import UserInfo from "@/components/UserInfo";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar } from 'react-circular-progressbar';
+
 
 export default function Home() {
   const { data: session } = useSession();
@@ -66,49 +69,50 @@ export default function Home() {
 
   const progress = calculateProgress();
 
+  const getProgressBarColor = (percentage) => {
+    if (percentage < 25) return '#FF0000'; // Red
+    if (percentage < 50) return '#FFA500'; // Orange
+    if (percentage < 75) return '#0000FF'; // Yellow
+    return '#00FF00'; // Green
+  };
+
+  const progressBarColor = getProgressBarColor(progress);
+
   return (
     <div>
       <UserInfo />
       <div className="mt-5">
-        <h1>Target Weight: {userData.goalWeight}KG</h1>
-        <h1>Target Calories for the day: {userData.goalCalories}</h1>
         {recentWeight && (
-          <>
-            <h2>Weights</h2>
-            <h3>Most Recent Weight- {recentWeight.weight}KG</h3>
+          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5">
+            <h1 className="font-bold text-xl mb-2">Weight Target</h1>
             <div className="relative pt-1">
-            <div className="flex mb-2 items-center justify-between">
-              <div>
-                <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">
-                  Progress
-                </span>
+              <div className="flex justify-center items-center">
+                <CircularProgressbar
+                  value={progress}
+                  text={`${progress}%`}
+                  styles={{
+                    root: {},
+                    path: {
+                      stroke: progressBarColor,
+                      strokeLinecap: 'round',
+                      transition: 'stroke-dashoffset 0.5s ease 0s',
+                    },
+                    text: {
+                      fill: progressBarColor,
+                      fontSize: '16px',
+                    },
+                    trail: {
+                      stroke: '#d6d6d6',
+                    },
+                  }}
+                />
               </div>
-              <div className="text-right">
-                <span className="text-xs font-semibold inline-block text-teal-600">
-                  {progress}%
-                </span>
-              </div>
-            </div>
-            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-              <div
-                style={{ width: `${progress}%` }}
-                className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${progress < 25 ? 'bg-red-500' : progress < 50 ? 'bg-yellow-500' : progress < 75 ? 'bg-green-500' : 'bg-blue-500'}`}
-              ></div>
             </div>
           </div>
-          </>
         )}
-        <ul>
-          {weights.map((weight) => (
-            <li key={weight._id}>
-              Weight: {weight.weight}KG, Date: {new Date(weight.date).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
 }
-
 
   
