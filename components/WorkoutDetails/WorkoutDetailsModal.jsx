@@ -103,7 +103,7 @@ export default function WorkoutModal({ workout, onClose }) {
           <p>No cardio data available</p>
         )}
         {/* <button onClick={closeWorkoutDetails}>Close</button> */}
-        <div className="singlebutton">
+        <div className="twobuttons">
           <button
             className="bg-blue-500 text-white px-6 py-2 rounded-md"
             onClick={openStartWorkoutModal}
