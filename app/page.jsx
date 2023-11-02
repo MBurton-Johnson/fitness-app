@@ -94,10 +94,10 @@ export default function Home() {
   const progress = calculateProgress();
 
   const getProgressBarColor = (percentage) => {
-    if (percentage < 25) return '#FF0000'; // Red
-    if (percentage < 50) return '#FFA500'; // Orange
-    if (percentage < 99) return '#0000FF'; // Blue
-    return '#00FF00'; // Green
+    if (percentage < 25) return '#CA3F54'; // Red
+    if (percentage < 50) return '#FFAC81'; // Orange
+    if (percentage < 99) return '#3993DD'; // Blue
+    return '80FF00'; // Green
   };
 
   const progressBarColor = getProgressBarColor(progress);
@@ -107,7 +107,7 @@ export default function Home() {
       <UserInfo />
       <div className="mt-5 flex justify-center">
         {userData.goalCalories && (
-          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 mr-10">
+          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 mr-10 bg-[#B6D6CC]">
             <h1 className="font-bold text-xl mb-5">Calories Target - {userData.goalCalories}kcal</h1>
             <div className="relative pt-1">
               <div className="flex justify-center items-center">
@@ -126,7 +126,7 @@ export default function Home() {
                       fontSize: '16px',
                     },
                     trail: {
-                      stroke: '#d6d6d6',
+                      stroke: 'white',
                     },
                   }}
                 />
@@ -135,8 +135,8 @@ export default function Home() {
           </div>
         )}
         {recentWeight && (
-          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5">
-            <h1 className="font-bold text-xl mb-5">Weight Target - {userData.goalWeight}KG</h1>
+          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 bg-[#B6D6CC]">
+            <h1 className="font-bold text-xl mb-5">Weight Target - {userData.goalWeight}kg</h1>
             <div className="relative pt-1">
               <div className="flex justify-center items-center">
                 <CircularProgressbar
@@ -154,7 +154,7 @@ export default function Home() {
                       fontSize: '16px',
                     },
                     trail: {
-                      stroke: '#d6d6d6',
+                      stroke: 'white',
                     },
                   }}
                 />

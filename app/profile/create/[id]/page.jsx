@@ -77,7 +77,7 @@ export default function createProfile() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen bg-red">
       <h1 className="text-3xl font-bold mb-6">Create Profile</h1>
       <div className="flex flex-col mb-4">
         <label htmlFor="gender" className="mb-2 font-semibold">
@@ -124,7 +124,7 @@ export default function createProfile() {
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="weight" className="mb-2 font-semibold">
-          Weight (KG)
+          Weight (kg)
         </label>
         <input
           id="weight"
@@ -134,12 +134,12 @@ export default function createProfile() {
           className="px-4 py-2 border border-gray-300 rounded-md"
           value={formData.weight}
           onChange={handleInputChange}
-          disabled={isWeightSet}
+          // disabled={isWeightSet}
         />
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="weight" className="mb-2 font-semibold">
-          Target Weight (KG)
+          Target Weight (kg)
         </label>
         <input
           id="goalWeight"

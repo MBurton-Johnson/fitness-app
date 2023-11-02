@@ -143,7 +143,7 @@ const handleDeleteWeight = async (weightId) => {
 
   
   return (
-    <div className="flex flex-col items-center justify-start h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-start h-screen bg-[#B6D6CC]">
     <h1 className="text-3xl font-bold mb-4 mt-4">Weight Tracker</h1>
 
     <div className="bg-white border border-gray-300 rounded-md p-6 mx-4 max-w-screen-md mb-8 text-center common-width flex flex-col items-center width-adjusted">
