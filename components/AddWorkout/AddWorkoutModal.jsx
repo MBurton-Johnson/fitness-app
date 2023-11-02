@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import '../WorkoutDetails/WorkoutDetailsModal.css';
+import "../WorkoutDetails/WorkoutDetailsModal.css";
 import "./AddWorkoutModal.css";
 import { addWorkoutToDatabase } from "./AddWorkoutContext.js";
 // import { useSession } from "next-auth/react";
@@ -9,7 +9,7 @@ export default function AddWorkoutModal({ onClose }) {
   // require('react-dom');
   // window.React2 = require('react');
   // console.log(window.React1 === window.React2);
-  // const { data: session } = useSession(); 
+  // const { data: session } = useSession();
   const { id } = useParams();
   const [workoutName, setWorkoutName] = useState("");
   const [exercises, setExercises] = useState([]);
@@ -46,10 +46,13 @@ export default function AddWorkoutModal({ onClose }) {
 
     try {
       // Call the addWorkoutToDatabase function to add a new workout
-      const response = await addWorkoutToDatabase({
-        method: "POST",
-        body: newWorkout,
-      }, id);
+      const response = await addWorkoutToDatabase(
+        {
+          method: "POST",
+          body: newWorkout,
+        },
+        id
+      );
 
       if (response.workout === null) {
         console.log("Workout saved successfully");
@@ -68,30 +71,60 @@ export default function AddWorkoutModal({ onClose }) {
   };
 
   return (
-    <div className="modal">
+    <div className="my-workout-div">
       <div className="modal-content">
-        <h2>Add New Workout</h2>
-
-        <div className="button-container">
-          <button onClick={handleSave}>Save Workout</button>
-          <button onClick={handleCancel}>Cancel</button>
+        <div className="header">
+          <button
+           
+            onClick={handleSave}
+            className="close-button"
+          >save
+          </button>
+          <h2>Add New Workout</h2>
+          <button
+            onClick={handleCancel}
+            className="close-button"
+          ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="white"
+          class="bi bi-x"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.293 8l3.854-3.854a1 1 0 10-1.414-1.414L8 6.586 4.146 2.732a1 1 0 10-1.414 1.414L6.586 8l-3.854 3.854a1 1 0 101.414 1.414L8 9.414l3.854 3.854a1 1 0 001.414-1.414L9.414 8z"
+          ></path>
+        </svg>
+            
+          </button>
         </div>
 
-        <label>
-          Workout Name:
-          <input
-            type="text"
-            value={workoutName}
-            onChange={(e) => setWorkoutName(e.target.value)}
-          />
-        </label>
-        
+        <div className="name-section">
+          {" "}
+          {/* Apply padding and margin classes */}
+          <label>
+            {/* <span className="name">Workout Name:</span> */}
+            <input
+              type="text"
+              value={workoutName}
+              onChange={(e) => setWorkoutName(e.target.value)}
+              placeholder="Workout Name"
+              className="input-section"
+            />
+          </label>
+        </div>
+
         <div className="exercises-section">
           {exercises.map((exercise, index) => (
             <div key={index} className="exercise-info">
+
               <div className="exercise-name-row">
+                {" "}
+                {/* Apply padding and margin classes */}
                 <label>
-                  Exercise Name:
+                  {/* <span className="font-bold">Exercise Name:</span> */}
                   <input
                     type="text"
                     value={exercise.exerciseName}
@@ -100,9 +133,12 @@ export default function AddWorkoutModal({ onClose }) {
                       newExercises[index].exerciseName = e.target.value;
                       setExercises(newExercises);
                     }}
+                    placeholder="Exercise Name"
+                    className="input-section" // Use the same classes
                   />
                 </label>
               </div>
+
               <div className="sets-reps-weight">
                 <label>
                   Sets:
@@ -114,6 +150,8 @@ export default function AddWorkoutModal({ onClose }) {
                       newExercises[index].sets = parseInt(e.target.value);
                       setExercises(newExercises);
                     }}
+                    placeholder="Sets"
+                    className="input-section"
                   />
                 </label>
                 <label>
@@ -126,6 +164,7 @@ export default function AddWorkoutModal({ onClose }) {
                       newExercises[index].reps = parseInt(e.target.value);
                       setExercises(newExercises);
                     }}
+                    className="input-section"
                   />
                 </label>
                 <label>
@@ -138,23 +177,35 @@ export default function AddWorkoutModal({ onClose }) {
                       newExercises[index].weight = parseInt(e.target.value);
                       setExercises(newExercises);
                     }}
+                    className="input-section"
                   />
                 </label>
               </div>
             </div>
           ))}
-          <button onClick={handleAddExercise}>Add Exercise</button>
+          <div className="singlebutton">
+          <button
+            className="bg-blue-500 text-white px-6 py-2 rounded-md"
+            onClick={handleAddExercise}
+          >
+            Add Exercise
+          </button>
+          </div>
         </div>
 
         <div className="cardio-section">
+
           {isAddingCardio ? (
-            <div>
+            <div className="name-section">
+              {" "}
               <label>
-                Cardio Type:
+                {/* Cardio Type: */}
                 <input
                   type="text"
                   value={cardioType}
                   onChange={(e) => setCardioType(e.target.value)}
+                  placeholder="Cardio"
+                  className="input-section"
                 />
               </label>
               {/* <label>
@@ -175,7 +226,14 @@ export default function AddWorkoutModal({ onClose }) {
               </label> */}
             </div>
           ) : (
-            <button onClick={handleAddCardio}>Add Cardio</button>
+            <div className="singlebutton">
+            <button
+              className="bg-blue-500 text-white px-6 py-2 rounded-md"
+              onClick={handleAddCardio}
+            >
+              Add Cardio
+            </button>
+            </div>
           )}
         </div>
       </div>

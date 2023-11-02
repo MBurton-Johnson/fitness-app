@@ -1,109 +1,128 @@
-AddWorkoutModal.css
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    color: black;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  h2 {
-    text-align: center;
-    margin: 0;
-  }
-  
-  label {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  .exercises-section,
-  .cardio-section {
-    margin-top: 10px;
-  }
-  
-  /* .exercises-section label, */
-  .cardio-section label {
-    display: block;
-  }
+.my-workout-div {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 800px;
+  background: white;
+  display: flex;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  flex-direction: column; /* To stack content vertically */
+  align-items: center; /* Center the content horizontally */
+  justify-content: center; /* Center the content vertically */
+}
+/* AddWorkoutModal.css */
+/* Style for the modal header */
 
-  /* Add this CSS to your existing styles */
-
-.exercises-section label {
-  display: block;
+.modal-content {
+  background: white;
+  padding: 20px;
+  /* border-radius: 5px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  color: black;
 }
 
-.exercises-section label input {
-  width: 100%; /* Change this to your desired width */
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style for buttons in the header */
+.header button {
+  background-color: #007BFF;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+/* Style for the h2 in the header */
+.header h2 {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Style for the name section */
+.name-section {
+ margin: 5px 0;
+}
+
+/* Style for the workout name label */
+.name-section .name {
+  font-weight: bold;
+}
+
+/* Style for the workout name input */
+.name-section .input-section {
+  background-color: #f0f0f0; /* Very light gray */
+  border-radius: 5px;
+  padding: 8px;
+}
+
+/* Style for exercise info */
+.exercise-info {
+  margin: 5px 0;
+  /* padding: 16px;
+  margin: 16px; */
+}
+
+/* Style for exercise info label */
+.exercise-info label {
+  font-weight: bold;
+}
+
+/* Style for exercise info input */
+.exercise-info .input-section {
+  background-color: #f0f0f0; /* Very light gray */
+  border-radius: 5px;
+  padding: 8px;
+}
+.exercise-name-row,
+.cardio-name-row {
+  display: flex;
+  align-items: center;
+}
+.exercise-name-row label,
+.cardio-name-row label {
+  width: 100%;
+}
+
+.exercise-name-row label
+.cardio-name-row, label {
+  font-weight: bold;
+  margin: 5px 0;
+  /* margin-right: 8px;  */
+}
+
+.exercise-name-row input
+.cardio-name-row input {
+  flex: 1; /* Make the input expand to fill the available space */
   padding: 5px;
-  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
-}
-
-.exercises-section .exercise-info {
-  /* display: flex;
-  align-items: column; */
-  margin-top: 5px;
-}
-
-.exercises-section .exercise-info label {
-  width: 100%; /* Set the desired width for each field */
-}
-
-.exercises-section .exercise-info input {
-  width: 100%; /* Set the desired width for each field */
-  padding: 5px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  margin-left: 0; /* Reset margin-left to align with the labels */
 }
 .sets-reps-weight {
   display: flex;
+  margin: 5px 0;
 }
- 
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 10px;
+.singlebutton,
+.exercise-name-row
+ {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
 
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+.name-section {
+  margin: 10px 0;
+}
+
+
+

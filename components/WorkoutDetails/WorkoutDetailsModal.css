@@ -1,4 +1,29 @@
-WorkoutModal.css
+/* Your CSS file */
+.header-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.close-button {
+  background-color: #ccc; /* Gray background color */
+  padding: 8px; /* Adjust padding as needed */
+  border-radius: 10%; 
+}
+
+.close-button svg {
+  fill: white; /* Fill color for the "x" icon */
+  width: 12px; /* Adjust the width and height as needed */
+  height: 12px;
+}
+.last-performed {
+  font-style: italic;
+  color: grey;
+}
+
+
+/* WorkoutModal.css
 .modal {
     position: fixed;
     top: 0;
@@ -9,6 +34,7 @@ WorkoutModal.css
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
   }
   
   .modal-content {
@@ -18,15 +44,12 @@ WorkoutModal.css
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     color: black;
   }
-  
-
   .modal-content {
     display: flex;
     flex-direction: column; 
     gap: 10px; 
   }
   
- 
   button {
     padding: 10px;
     background-color: #007BFF;
@@ -37,4 +60,4 @@ WorkoutModal.css
   }
   
 
-  
+   */

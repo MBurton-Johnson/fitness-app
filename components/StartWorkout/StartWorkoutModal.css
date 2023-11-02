@@ -1,0 +1,23 @@
+.my-workout-div-edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 800px;
+    background: white;
+    display: flex;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column; /* To stack content vertically */
+    align-items: center; /* Center the content horizontally */
+    justify-content: center; /* Center the content vertically */
+  }
+  .exercise-name-row {
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    margin: 10px 0;
+}

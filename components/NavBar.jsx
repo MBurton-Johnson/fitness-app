@@ -26,7 +26,7 @@ export default function NavBar() {
     <>
       <div className="flex flex-col items-center mt-8">
         <h1 className="flex items-center text-4xl font-bold text-blue-700">
-          TracTive
+          TrackTive
         </h1>
       </div>
       <div className="p-4 flex justify-between items-center">

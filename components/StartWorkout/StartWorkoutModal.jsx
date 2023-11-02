@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './StartWorkoutModal.css'
 // import { updateWorkoutToDatabase } from "./StartWorkoutApi.jsx";
 // import { useParams } from "next/navigation";
 
@@ -31,35 +32,53 @@ export default function StartWorkoutModal({ workout, onClose }) {
   };
 
   return (
-    <div className="modal">
+    <div className="my-workout-div-edit">
       <div className="modal-content">
-        <h2>Start Workout</h2>
-        <p>Workout Name: {editedWorkout.workoutName}</p>
+        <div>
+        <button onClick={onClose} className="close-button"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="white"
+              class="bi bi-x"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.293 8l3.854-3.854a1 1 0 10-1.414-1.414L8 6.586 4.146 2.732a1 1 0 10-1.414 1.414L6.586 8l-3.854 3.854a1 1 0 101.414 1.414L8 9.414l3.854 3.854a1 1 0 001.414-1.414L9.414 8z"
+              ></path>
+            </svg></button>
+        </div>
+      <div className="header">
+        {/* <h2>Start Workout</h2> */}
+        <p>{editedWorkout.workoutName}</p>
         <p>Date: <input type="date" value={editedWorkout.workoutDate} onChange={(e) => setEditedWorkout({ ...editedWorkout, workoutDate: e.target.value })} /></p>
+        </div>
 
         <div className="exercise-section">
           {/* <h3>Exercise Details:</h3> */}
           {editedWorkout.exercises.map((exercise, index) => (
             <div key={index} className="exercise-info">
               <div className="exercise-name-row">
-              <p> {exercise.exerciseName}</p>
+              <p className="exercise-name-row"> {exercise.exerciseName}</p>
               </div>
+
               <div className="sets-reps-weight">
               <p>Sets: <input type="number" value={exercise.sets} onChange={(e) => {
                 const newExercises = [...editedWorkout.exercises];
                 newExercises[index].sets = parseInt(e.target.value);
                 setEditedWorkout({ ...editedWorkout, exercises: newExercises });
-              }} /></p>
+              }} className="input-section"/></p>
               <p>Reps: <input type="number" value={exercise.reps} onChange={(e) => {
                 const newExercises = [...editedWorkout.exercises];
                 newExercises[index].reps = parseInt(e.target.value);
                 setEditedWorkout({ ...editedWorkout, exercises: newExercises });
-              }} /></p>
+              }} className="input-section"/></p>
               <p>Weight: <input type="number" value={exercise.weight} onChange={(e) => {
                 const newExercises = [...editedWorkout.exercises];
                 newExercises[index].weight = parseInt(e.target.value);
                 setEditedWorkout({ ...editedWorkout, exercises: newExercises });
-              }} /></p>
+              }} className="input-section"/></p>
 </div>
             </div>
           ))}
@@ -74,8 +93,10 @@ export default function StartWorkoutModal({ workout, onClose }) {
           <p>Distance: <input type="number" value={editedWorkout.cardio ? editedWorkout.cardio.distance : 0} onChange={(e) => setEditedWorkout({ ...editedWorkout, cardio: { ...editedWorkout.cardio, distance: e.target.value } })} /></p>
           </div>
         </div>
-        <button onClick={handleSave}>Finish Workout</button>
-        <button onClick={onClose}>Cancel</button>
+        <div className="singlebutton">
+        <button className="bg-blue-500 text-white px-6 py-2 rounded-md" onClick={handleSave}>Finish Workout</button>
+        </div>
+        {/* <button onClick={onClose}>Cancel</button> */}
       </div>
     </div>
   );
