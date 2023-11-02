@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import { useTotalCalories } from '../contexts/CaloriesContext'
 
 export default function Home() {
   const { data: session } = useSession();
@@ -13,7 +12,7 @@ export default function Home() {
   const [weights, setWeights] = useState([]);
   const [totalCaloriesPercentage, setTotalCaloriesPercentage] = useState(0);
   const [recentWeight, setRecentWeight] = useState('')
-  const { totalCalories } = useTotalCalories();
+  const [totalCalories, setTotalCalories] = useState(0)
 
   useEffect(() => {
     async function fetchUserData() {
@@ -42,6 +41,22 @@ export default function Home() {
       }
 
       fetchWeights();
+    }
+  }, [userData._id]);
+
+  useEffect(() => {
+    if (userData._id) {
+      async function fetchTotalCalories() {
+        try {
+          const response = await fetch(`http://localhost:3006/calories/total/${userData._id}`);
+          const data = await response.json();
+          setTotalCalories(data.totalCalories);
+        } catch (error) {
+          console.error('Error fetching total calories:', error);
+        }
+      }
+
+      fetchTotalCalories();
     }
   }, [userData._id]);
 
@@ -81,7 +96,7 @@ export default function Home() {
   const getProgressBarColor = (percentage) => {
     if (percentage < 25) return '#FF0000'; // Red
     if (percentage < 50) return '#FFA500'; // Orange
-    if (percentage < 75) return '#0000FF'; // Blue
+    if (percentage < 99) return '#0000FF'; // Blue
     return '#00FF00'; // Green
   };
 
