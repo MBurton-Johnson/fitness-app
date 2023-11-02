@@ -1,0 +1,49 @@
+/* page.css */
+h2 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.workout-list {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;;
+    margin: 0 auto;
+  }
+  
+  .workout-list:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .workout-buttons {
+    margin-bottom: 50px;
+  }
+  .singleworkout {
+    width: 120px; /* Adjust the square size as needed */
+    height: 120px; /* Same value as width to make it a square */
+    margin: 10px; /* Add some margin between squares */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #f2f2f2; /* Background color for the square */
+    border: 1px solid #ddd; 
+    border-radius: 10%;
+  }
+  
+  /* Optional: Hover effect to highlight the square on hover */
+  .singleworkout:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Ensure flex-wrap for the container */
+  ul.text-right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style: none; /* Remove default list styles */
+  }
+  
