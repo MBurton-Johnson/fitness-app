@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './StartWorkoutModal.css'
 // import { updateWorkoutToDatabase } from "./StartWorkoutApi.jsx";
 // import { useParams } from "next/navigation";
@@ -8,6 +8,14 @@ export default function StartWorkoutModal({ workout, onClose }) {
   // const { id } = useParams();
   console.log(workout._id)
   const [editedWorkout, setEditedWorkout] = useState({ ...workout });
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+
+
+  useEffect(() => {
+    if (shouldRefresh) {
+      window.location.reload();
+    }
+  }, [shouldRefresh]);
   const handleSave = async () => {
     try {
       // Call the updateWorkoutToDatabase function to update the workout
@@ -18,11 +26,15 @@ export default function StartWorkoutModal({ workout, onClose }) {
       "_id": workout._id
       },
       body: JSON.stringify({...editedWorkout}) 
-      },); // Pass the ID of the workout you want to update
+      
+      }, setShouldRefresh(true) ); // Pass the ID of the workout you want to update
   
       // Handle the response as needed (e.g., show a success message)
       if (response.status === 200) {
+
+
         console.log('Workout updated successfully');
+        setShouldRefresh(true)
         window.location.reload()
       }
     } catch (error) {

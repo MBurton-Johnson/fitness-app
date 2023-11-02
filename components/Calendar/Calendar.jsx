@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import "../WorkoutDetails/WorkoutDetailsModal";
 import "./Calendar.css";
+import WorkoutModal from "../WorkoutDetails/WorkoutDetailsModal";
 
 const Calendar = () => {
   const { id } = useParams();
   const [workouts, setWorkouts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false); // Add a flag to control data loading
-
-  
-
+  const [selectedWorkout, setSelectedWorkout] = useState(null); // State to store selected workout
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control the modal
 
   const today = new Date();
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
   const currentDay = today.getDate(); // Get the current day of the month
-
 
   // Calculate the start date of the current month (1st day)
   const startDate = new Date(currentYear, currentMonth, 1);
@@ -24,6 +24,10 @@ const Calendar = () => {
   // Calculate the end date of the current month (last day)
   const endDate = new Date(currentYear, currentMonth + 1, 0);
 
+  const handleDayClick = (workout) => {
+    setSelectedWorkout(workout); // Set the selected workout
+    setIsModalOpen(true); // Open the modal
+  };
   const fetchWorkouts = () => {
     // Simulated data fetch. Replace with your actual data fetching logic.
     return fetch(`http://localhost:3006/workouts`, {
@@ -42,16 +46,20 @@ const Calendar = () => {
   // Fetch workouts when the component mounts or when dependencies change
   useEffect(() => {
     const currentDayStart = new Date(currentYear, currentMonth, currentDay);
-    const currentDayEnd = new Date(currentYear, currentMonth, currentDay, 23, 59, 59); // Set the end time to the end of the day
+    const currentDayEnd = new Date(
+      currentYear,
+      currentMonth,
+      currentDay,
+      23,
+      59,
+      59
+    ); // Set the end time to the end of the day
 
     // Fetch workouts here (e.g., an API call)
     fetchWorkouts(currentDayStart, currentDayEnd).then((data) => {
       setWorkouts(data);
     });
   }, [currentYear, currentMonth, currentDay]);
-
-  
-
 
   const isSameDay = (date1, date2) => {
     return (
@@ -89,9 +97,9 @@ const Calendar = () => {
         <div
           key={day}
           className={`day ${workout ? "has-workout" : ""}`}
+          onClick={() => handleDayClick(workout)} // Add this onClick handler
         >
           {currentDate.getDate()}
-          {/* {workout && <div>{workout.workoutName}</div>} */}
         </div>
       );
 
@@ -114,6 +122,7 @@ const Calendar = () => {
         {getMonthName(currentMonth)} {currentYear}
       </div>
       {renderWeeks()}
+      {isModalOpen && selectedWorkout && <WorkoutModal workout={selectedWorkout} onClose={() => setIsModalOpen(false)} />}
     </div>
   );
 };
@@ -136,6 +145,5 @@ const getMonthName = (monthNumber) => {
   ];
   return months[monthNumber];
 };
-
 
 export default Calendar;
