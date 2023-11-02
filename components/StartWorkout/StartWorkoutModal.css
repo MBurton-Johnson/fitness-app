@@ -15,4 +15,28 @@
     align-items: center; /* Center the content horizontally */
     justify-content: center; /* Center the content vertically */
   }
- 
+  .close-button-div {
+    display: flex;
+    justify-content: space-between; /* Pushes the close button to the right */
+    align-items: center;
+  }
+  
+  .close-button {
+    /* Add some margin or padding to separate it from the content on the left */
+    margin-left: auto; /* This pushes the close button to the right */
+  }
+  .exercise-name-row-div {
+    width: 100%;
+    /* display: flex; */
+    /* justify-content: center; */
+    margin: 10px 0;
+  }
+  .input-section{
+    background-color: #f0f0f0; /* Very light gray */
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+  }
+  .cardio-section p {
+    margin: 5px 0;
+  }

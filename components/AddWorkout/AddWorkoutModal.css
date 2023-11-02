@@ -1,8 +1,8 @@
 .my-workout-div {
   position: absolute;
   top: 20%;
-  left: 30%;
-  width: 800px;
+  left: 33%;
+  width: 45%;
   background: white;
   display: flex;
   padding: 20px;
@@ -19,28 +19,27 @@
 /* Style for the modal header */
 
 .modal-content {
+  width: 100%;
+  max-width: 100%; 
   background: white;
   padding: 20px;
-  /* border-radius: 5px; */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
   color: black;
 }
-
-
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.close-div {
+  margin: 10px 0;
+  display: flex; /* Added */
+  justify-content: flex-end; /* Added */
+}
+.header-addworkout {
+  border-bottom: 1px solid lightgrey;
 }
 
-/* Style for buttons in the header */
-.header button {
+/* .header button {
   background-color: #007BFF;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
-}
+} */
 
 /* Style for the h2 in the header */
 .header h2 {
@@ -59,10 +58,14 @@
 }
 
 /* Style for the workout name input */
-.name-section .input-section {
+.name-section .input-section-name {
   background-color: #f0f0f0; /* Very light gray */
   border-radius: 5px;
   padding: 8px;
+  border-bottom: 1px solid #eff4f6 ;
+}
+.input-section {
+  width: 50%;
 }
 
 /* Style for exercise info */
