@@ -15,6 +15,7 @@
     width: 500px;
     max-width: 90%;
     padding: 20px;
+    height: auto;
     background-color: #fff;
     border-radius: 5px;
     outline: none;
@@ -50,4 +51,12 @@
 
 .ReactModal__Content button:hover {
     background-color: #0051a1;
+}
+
+.modal-close-button {
+    margin-top: 10px;
+}
+
+.ReactModal__Overlay .ReactModal__Content {
+    inset: auto !important;  /* This will reset the inset values */
 }
