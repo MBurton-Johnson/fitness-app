@@ -4,17 +4,18 @@ import Modal from 'react-modal';
 import { useRouter, useParams } from 'next/navigation';
 import '/components/AddFood/AddFood.css';
 import '/components/AddFood/AddFoodModal.css';
+import { useTotalCalories } from '../../../contexts/CaloriesContext';
 
 export default function Nutrition() {
 
     const { id: userId } = useParams();  // <-- Use useParams to get the userId directly
     const router = useRouter(); 
+    const { totalCalories, setTotalCalories } = useTotalCalories();
 
     const [foods, setFoods] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [currentFood, setCurrentFood] = useState({});
     const [foodCategory, setFoodCategory] = useState(null);  // 'breakfast', 'lunch', 'dinner', 'snack'
-    const [totalCalories, setTotalCalories] = useState(0);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [goalCalories, setGoalCalories] = useState(0);
 
