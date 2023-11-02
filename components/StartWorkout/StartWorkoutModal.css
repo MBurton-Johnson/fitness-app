@@ -15,9 +15,4 @@
     align-items: center; /* Center the content horizontally */
     justify-content: center; /* Center the content vertically */
   }
-  .exercise-name-row {
-    width: 100%;
-    display: flex;
-    /* justify-content: center; */
-    margin: 10px 0;
-}
+ 

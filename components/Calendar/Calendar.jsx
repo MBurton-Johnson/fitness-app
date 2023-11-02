@@ -1,4 +1,5 @@
 'use client'
+'use client'
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
@@ -49,24 +50,81 @@ const Calendar = () => {
     );
   };
 
-  return (
-    <div className="calendar">
-      {Array.from({ length: endDate.getDate() }).map((_, day) => {
-        const currentDate = new Date(currentYear, currentMonth, day + 1);
+  const renderWeeks = () => {
+    const weeks = [];
+    let currentWeek = [];
+    const daysInWeek = 7;
 
-        const workout = workouts.find((w) =>
-          isSameDay(new Date(w.workoutDate), currentDate)
-        );
+    // Calculate the day of the week for the 1st day of the month
+    const dayOfWeek = startDate.getDay();
 
-        return (
-          <div key={day} className={`day ${workout ? "has-workout" : ""}`}>
-            {currentDate.getDate()}
-            {workout && <div>{workout.workoutName}</div>}
+    // Create blank cells for days before the 1st day of the month
+    for (let i = 0; i < dayOfWeek; i++) {
+      currentWeek.push(
+        <div key={`blank-${i}`} className="day blank">
+          {/* Empty cell */}
+        </div>
+      );
+    }
+
+    for (let day = 1; day <= endDate.getDate(); day++) {
+      const currentDate = new Date(currentYear, currentMonth, day);
+
+      const workout = workouts.find((w) =>
+        isSameDay(new Date(w.workoutDate), currentDate)
+      );
+
+      currentWeek.push(
+        <div
+          key={day}
+          className={`day ${workout ? "has-workout" : ""}`}
+        >
+          {currentDate.getDate()}
+          {/* {workout && <div>{workout.workoutName}</div>} */}
+        </div>
+      );
+
+      if (currentDate.getDay() === 0 || day === endDate.getDate()) {
+        weeks.push(
+          <div key={weeks.length} className="week">
+            {currentWeek}
           </div>
         );
-      })}
+        currentWeek = [];
+      }
+    }
+
+    return weeks;
+  };
+
+  return (
+    <div className="calendar">
+      <div className="month-header">
+        {getMonthName(currentMonth)} {currentYear}
+      </div>
+      {renderWeeks()}
     </div>
   );
 };
+
+// Helper function to get the month name from the month number (0 to 11)
+const getMonthName = (monthNumber) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return months[monthNumber];
+};
+
 
 export default Calendar;

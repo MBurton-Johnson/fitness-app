@@ -11,16 +11,7 @@ import { useParams } from "next/navigation";
 import "./page.css"; // Import your CSS file
 import Calendar from "@/components/Calendar/Calendar";
 
-
 export default function WorkoutPage() {
-
-  function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-      return text.slice(0, maxLength) + " ..."; // Add an ellipsis for truncated text
-    }
-    return text;
-  }
-  
   const { id } = useParams();
   // const router = useRouter();
   // const userId = router.query.userId;
@@ -81,39 +72,39 @@ export default function WorkoutPage() {
 
   return (
     <>
-    <div>
-      <div className="workout-content">
-        <div className="workout-buttons">
-          <button
-            onClick={openCreateModal}
-            className="bg-blue-500 text-white px-6 py-2 rounded-md"
-          >
-            Create New Workout
-          </button>
-        </div>
-<div className="calendar">
-<Calendar workouts={workouts} />
-</div>
-
-        <div className="workout-list">
-          <div>
-            <h2>Recently added workouts</h2>
+      <div>
+        <div className="workout-content">
+          <div className="top-section">
+          <div className="workout-buttons">
+            <button
+              onClick={openCreateModal}
+              className="bg-blue-500 text-white px-6 py-2 rounded-md"
+            >
+              Create New Workout
+            </button>
           </div>
-          <ul className="text-right">
-            {workouts?.map((workout) => (
-              <div className="singleworkout">
-              <li key={workout?._id}>
-                <a onClick={() => openModal(workout)}>{workout.workoutName}
-                </a>
-              </li>
-              </div>
-            ))}
-          </ul>
+          <div className="calendar-div">
+            <Calendar workouts={workouts} />
+          </div>
+          </div>
+          <div className="workout-list">
+            <div>
+              <h2>Recently added workouts</h2>
+            </div>
+            <ul className="text-right">
+              {workouts?.map((workout) => (
+                <div className="singleworkout">
+                  <li key={workout?._id}>
+                    <a onClick={() => openModal(workout)}>
+                      {workout.workoutName}
+                    </a>
+                  </li>
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-
-    
-    </div>
       {selectedWorkout && (
         <WorkoutModal workout={selectedWorkout} onClose={closeModal} />
       )}
@@ -127,7 +118,6 @@ export default function WorkoutPage() {
           session={useSession}
         />
       )}
-      </>
+    </>
   );
-
 }

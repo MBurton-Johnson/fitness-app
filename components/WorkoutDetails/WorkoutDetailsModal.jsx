@@ -32,9 +32,8 @@ export default function WorkoutModal({ workout, onClose }) {
       <div className="modal-content">
         {/* <h2>Workout Details</h2> */}
 
-        <div className="header-details">
-          <h2>{workout.workoutName}</h2>
-          <button onClick={closeWorkoutDetails} className="close-button">
+        <div close-div>
+        <button onClick={closeWorkoutDetails} className="close-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -49,6 +48,10 @@ export default function WorkoutModal({ workout, onClose }) {
               ></path>
             </svg>
           </button>
+        </div>
+        <div className="header-details">
+          <h2>{workout.workoutName}</h2>
+          
         </div>
 
         <div className="last-performed">

@@ -4,6 +4,17 @@ h2 {
     font-size: 20px;
 }
 
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+.calendar-div {
+    border: 1px solid #ddd;
+    border-radius: 10%;
+}
 .workout-list {
     background-color: #fff;
     border-radius: 8px;
@@ -18,7 +29,11 @@ h2 {
   }
   
   .workout-buttons {
-    margin-bottom: 50px;
+    
+    width: 30%; /* Adjust the width as needed */
+  }
+  .calendar {
+    width: 70%; /* Adjust the width as needed */
   }
   .singleworkout {
     width: 120px; /* Adjust the square size as needed */
