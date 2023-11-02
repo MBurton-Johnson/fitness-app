@@ -14,13 +14,27 @@ export default function Nutrition() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [currentFood, setCurrentFood] = useState({});
     const [foodCategory, setFoodCategory] = useState(null);  // 'breakfast', 'lunch', 'dinner', 'snack'
+    const [totalCalories, setTotalCalories] = useState(0);
+    const [currentDate, setCurrentDate] = useState(new Date());
 
 useEffect(() => {
-    fetch(`http://localhost:3006/foods?userId=${userId}`)
+    fetch(`http://localhost:3006/foods?userId=${userId}&today=true`)
         .then(res => res.json())
         .then(data => setFoods(data));
     }, [userId]); // Fetch foods once when the component mounts and whenever userId changes
 
+useEffect(() => {
+        const allCategories = ['breakfast', 'lunch', 'dinner', 'snacks'];
+        let sum = 0;
+        allCategories.forEach(category => {
+            sum += getTotalCaloriesByType(category);
+    });
+        setTotalCalories(sum);
+    }, [foods]); // Recompute totalCalories whenever the foods change.
+
+useEffect(() => {
+    fetchFoods();
+}, [currentDate]);
 
     const handleOpenModal = (category, food = {}) => {
         setFoodCategory(category);
@@ -63,6 +77,7 @@ useEffect(() => {
                 body: JSON.stringify(foodData),
                 
             }).then(() => {
+                fetchFoods(); 
                 handleCloseModal();
                 // Refetch or update state directly to reflect changes
             });
@@ -70,8 +85,21 @@ useEffect(() => {
     } 
 
     const handleDeleteFood = (foodId) => {
-        // Logic to delete this food, e.g., making a DELETE request to your API
-        // After successful deletion, close the modal and optionally refresh the food list
+        fetch(`http://localhost:3006/foods/${foodId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the deleted food from the local state
+                setFoods(prevFoods => prevFoods.filter(food => food._id !== foodId));
+                handleCloseModal();
+            } else {
+                throw new Error('Failed to delete food');
+            }
+        })
+        .catch(error => {
+            console.error('There was an error deleting the food:', error);
+        });
     }
 
     const renderFoodsByType = (category) => {
@@ -90,14 +118,59 @@ useEffect(() => {
     }    
 
     const fetchFoods = () => {
-        fetch(`http://localhost:3006/foods?userId=${userId}`)
+        const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+        fetch(`http://localhost:3006/foods?userId=${userId}&date=${dateStr}`)
             .then(res => res.json())
             .then(data => setFoods(data));
-    };    
+    };   
 
+    const goalCalories = 2000;
+
+    const goToPreviousDay = () => {
+        setCurrentDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setDate(prevDate.getDate() - 1);
+            return newDate;
+        });
+    };
+    
+    const goToNextDay = () => {
+        setCurrentDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setDate(prevDate.getDate() + 1);
+            return newDate;
+        });
+    };
+    
     return (
         <div className="container">
 
+        <div className="date-navigation">
+                    <button onClick={goToPreviousDay}>&lt;</button> {/* left arrow button */}
+                    <h2>{currentDate.toDateString()}</h2>
+                    <button onClick={goToNextDay}>&gt;</button> {/* right arrow button */}
+                </div>
+
+        <div className="calories-box">
+            <h2>Calories Remaining</h2>
+            <div className="calorie-calculation">
+                <div className="calorie-item">
+                    <div>{goalCalories}</div>
+                    <div>Goal</div>
+                </div>
+                <div className="calorie-separator"> - </div>
+                <div className="calorie-item">
+                    <div>{totalCalories}</div>
+                    <div>Food</div>
+                </div>
+                <div className="calorie-separator"> = </div>
+                <div className="calorie-item">
+                    <div>{goalCalories - totalCalories}</div>
+                    <div>Remaining</div>
+                </div>
+            </div>
+        </div>
+            
     <div className="meal-section">
         <div className="meal-header">
             <h2>Breakfast</h2> 
@@ -188,9 +261,9 @@ useEffect(() => {
                     />
 
                     <button type="submit">{currentFood._id ? 'Update' : 'Add'} Food</button>
-                        {currentFood._id && <button onClick={() => handleDeleteFood(currentFood._id)}>Delete</button>}
+                    {currentFood._id && <button className="modal-delete-button" onClick={() => handleDeleteFood(currentFood._id)}>Delete</button>}
                 </form>
-                    <button onClick={handleCloseModal}>Close</button>
+                <button className="modal-close-button" onClick={handleCloseModal}>Close</button>
         </Modal>
 
         </div>

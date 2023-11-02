@@ -31,6 +31,7 @@ h2 {
 }
 
 .food-item {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,6 +40,10 @@ h2 {
     border: 1px solid #eaeaea;
     border-radius: 5px;
     background-color: #f7f7f7;
+}
+
+.food-item:hover {
+    background-color: #d3d3d3; /* Replace with a slightly darker gray than the original. */
 }
 
 .food-item h3 {
@@ -76,4 +81,57 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.calories-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.calorie-calculation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calorie-calculation > div {
+    margin: 0 10px;
+}
+
+.calorie-item, .calorie-separator {
+    margin: 0 10px;
+}
+
+.calorie-item > div:first-child {
+    font-size: 24px; 
+    font-weight: bold;
+}
+
+.calorie-item > div:last-child {
+    text-align: center;
+}
+
+.date-navigation {
+    display: flex; /* Use Flexbox */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Align the main axis items (horizontally) in the center */
+    margin-bottom: 10px;
+}
+
+.date-navigation h2 {
+    margin: 0 20px; /* Add some margin to the left and right of the date */
+}
+
+.date-navigation button {
+    background-color: #f7f7f7; /* Light gray background color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Some padding */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    transition: background-color 0.3s; /* Add a transition for a smooth color change */
+}
+
+.date-navigation button:hover {
+    background-color: #e0e0e0; /* Darker gray background color on hover */
 }
