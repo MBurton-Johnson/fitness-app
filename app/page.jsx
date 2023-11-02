@@ -5,13 +5,15 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
-
+import { useTotalCalories } from '../contexts/CaloriesContext'
 
 export default function Home() {
   const { data: session } = useSession();
   const [userData, setUserData] = useState({ _id: null });
   const [weights, setWeights] = useState([]);
+  const [totalCaloriesPercentage, setTotalCaloriesPercentage] = useState(0);
   const [recentWeight, setRecentWeight] = useState('')
+  const { totalCalories } = useTotalCalories();
 
   useEffect(() => {
     async function fetchUserData() {
@@ -59,6 +61,13 @@ export default function Home() {
     }
   }, [userData._id])
 
+  useEffect(() => {
+    if (userData.goalCalories && totalCalories) {
+      const percentage = Math.round((totalCalories / userData.goalCalories) * 100);
+      setTotalCaloriesPercentage(Math.min(100, Math.max(0, percentage)));
+    }
+  }, [userData.goalCalories, totalCalories]);
+
   const calculateProgress = () => {
     if (userData.goalWeight && recentWeight && recentWeight.weight) {
       const percentage = Math.round(((recentWeight.weight - userData.weight) / (userData.goalWeight - userData.weight)) * 100);
@@ -72,7 +81,7 @@ export default function Home() {
   const getProgressBarColor = (percentage) => {
     if (percentage < 25) return '#FF0000'; // Red
     if (percentage < 50) return '#FFA500'; // Orange
-    if (percentage < 75) return '#0000FF'; // Yellow
+    if (percentage < 75) return '#0000FF'; // Blue
     return '#00FF00'; // Green
   };
 
@@ -81,10 +90,38 @@ export default function Home() {
   return (
     <div>
       <UserInfo />
-      <div className="mt-5">
+      <div className="mt-5 flex justify-center">
+        {userData.goalCalories && (
+          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 mr-10">
+            <h1 className="font-bold text-xl mb-5">Calories Target - {userData.goalCalories}kcal</h1>
+            <div className="relative pt-1">
+              <div className="flex justify-center items-center">
+                <CircularProgressbar
+                  value={totalCaloriesPercentage}
+                  text={`${totalCaloriesPercentage}%`}
+                  styles={{
+                    root: {},
+                    path: {
+                      stroke: getProgressBarColor(totalCaloriesPercentage),
+                      strokeLinecap: 'round',
+                      transition: 'stroke-dashoffset 0.5s ease 0s',
+                    },
+                    text: {
+                      fill: getProgressBarColor(totalCaloriesPercentage),
+                      fontSize: '16px',
+                    },
+                    trail: {
+                      stroke: '#d6d6d6',
+                    },
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
         {recentWeight && (
           <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5">
-            <h1 className="font-bold text-xl mb-2">Weight Target</h1>
+            <h1 className="font-bold text-xl mb-5">Weight Target - {userData.goalWeight}KG</h1>
             <div className="relative pt-1">
               <div className="flex justify-center items-center">
                 <CircularProgressbar
@@ -114,5 +151,3 @@ export default function Home() {
     </div>
   );
 }
-
-  
