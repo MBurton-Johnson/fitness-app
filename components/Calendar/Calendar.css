@@ -8,11 +8,12 @@
   .day {
     text-align: center;
     padding: 5px;
+    margin: 1px;
     /* border: 1px solid #ccc; */
     background-color: white;
     display: inline-block;
     width: calc(250px / 7);
-    height: 40px; /* Adjust the height as needed */
+    height: 35px; /* Adjust the height as needed */
     font-size: 16px; /* Adjust the font size as needed */
   }
   

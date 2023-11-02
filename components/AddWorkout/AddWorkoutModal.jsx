@@ -56,7 +56,9 @@ export default function AddWorkoutModal({ onClose }) {
 
       if (response.workout === null) {
         console.log("Workout saved successfully");
+        window.location.reload();
         onClose(); // Close the modal
+        
       } else {
         console.error("Failed to save the workout");
       }
@@ -73,32 +75,27 @@ export default function AddWorkoutModal({ onClose }) {
   return (
     <div className="my-workout-div">
       <div className="modal-content">
-        <div className="header">
-          <button
-           
-            onClick={handleSave}
-            className="close-button"
-          >save
+
+      <div className="close-div">
+        <button onClick={handleCancel} className="close-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="white"
+              class="bi bi-x"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.293 8l3.854-3.854a1 1 0 10-1.414-1.414L8 6.586 4.146 2.732a1 1 0 10-1.414 1.414L6.586 8l-3.854 3.854a1 1 0 101.414 1.414L8 9.414l3.854 3.854a1 1 0 001.414-1.414L9.414 8z"
+              ></path>
+            </svg>
           </button>
+        </div>
+
+        <div className="header-addworkout">
           <h2>Add New Workout</h2>
-          <button
-            onClick={handleCancel}
-            className="close-button"
-          ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="white"
-          class="bi bi-x"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M9.293 8l3.854-3.854a1 1 0 10-1.414-1.414L8 6.586 4.146 2.732a1 1 0 10-1.414 1.414L6.586 8l-3.854 3.854a1 1 0 101.414 1.414L8 9.414l3.854 3.854a1 1 0 001.414-1.414L9.414 8z"
-          ></path>
-        </svg>
-            
-          </button>
         </div>
 
         <div className="name-section">
@@ -111,7 +108,7 @@ export default function AddWorkoutModal({ onClose }) {
               value={workoutName}
               onChange={(e) => setWorkoutName(e.target.value)}
               placeholder="Workout Name"
-              className="input-section"
+              className="input-section-name"
             />
           </label>
         </div>
@@ -205,7 +202,7 @@ export default function AddWorkoutModal({ onClose }) {
                   value={cardioType}
                   onChange={(e) => setCardioType(e.target.value)}
                   placeholder="Cardio"
-                  className="input-section"
+                  className="input-section-name"
                 />
               </label>
               {/* <label>
@@ -235,6 +232,14 @@ export default function AddWorkoutModal({ onClose }) {
             </button>
             </div>
           )}
+          <div className="singlebutton">
+            <button
+              className="bg-blue-500 text-white px-6 py-2 rounded-md"
+              onClick={handleSave}
+            >
+              Save Workout
+            </button>
+            </div>
         </div>
       </div>
     </div>

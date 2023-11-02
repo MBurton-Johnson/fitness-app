@@ -27,12 +27,36 @@ export default function WorkoutModal({ workout, onClose }) {
     onClose();
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:3006/workouts/${workout._id}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "_id": workout._id
+        }
+      }); // Remove the extra closing parenthesis here
+  
+      if (response.status === 200) {
+        console.log("Workout deleted");
+        onClose(); // Close the modal after successful deletion
+        window.location.reload();
+      } else {
+        console.error("Error deleting workout");
+        // Handle the error, e.g., show an error message to the user
+      }
+    } catch (error) {
+      console.error("Error deleting workout", error);
+      // Handle the error, e.g., show an error message to the user
+    }
+  };
+  
   return (
     <div className="my-workout-div">
       <div className="modal-content">
         {/* <h2>Workout Details</h2> */}
 
-        <div close-div>
+        <div className="close-div">
         <button onClick={closeWorkoutDetails} className="close-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +110,9 @@ export default function WorkoutModal({ workout, onClose }) {
           >
             Start Workout
           </button>
+          <button className="bg-red-500 text-white px-6 py-2 rounded-md" onClick={handleDelete}>
+  Delete Workout
+</button>
         </div>
         {isStartWorkoutModalOpen && (
           <StartWorkoutModal workout={workout} onClose={closeWorkoutDetails} />

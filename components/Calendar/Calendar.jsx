@@ -1,5 +1,4 @@
 'use client'
-'use client'
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
@@ -8,10 +7,16 @@ import "./Calendar.css";
 const Calendar = () => {
   const { id } = useParams();
   const [workouts, setWorkouts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false); // Add a flag to control data loading
+
+  
+
 
   const today = new Date();
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
+  const currentDay = today.getDate(); // Get the current day of the month
+
 
   // Calculate the start date of the current month (1st day)
   const startDate = new Date(currentYear, currentMonth, 1);
@@ -36,11 +41,17 @@ const Calendar = () => {
 
   // Fetch workouts when the component mounts or when dependencies change
   useEffect(() => {
+    const currentDayStart = new Date(currentYear, currentMonth, currentDay);
+    const currentDayEnd = new Date(currentYear, currentMonth, currentDay, 23, 59, 59); // Set the end time to the end of the day
+
     // Fetch workouts here (e.g., an API call)
-    fetchWorkouts().then((data) => {
+    fetchWorkouts(currentDayStart, currentDayEnd).then((data) => {
       setWorkouts(data);
     });
-  }, [currentYear, currentMonth]);
+  }, [currentYear, currentMonth, currentDay]);
+
+  
+
 
   const isSameDay = (date1, date2) => {
     return (
