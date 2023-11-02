@@ -1,0 +1,67 @@
+.ReactModal__Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black to overlay the content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ReactModal__Content {
+    position: relative;
+    width: 500px;
+    max-width: 90%;
+    padding: 20px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ReactModal__Content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.ReactModal__Content input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.ReactModal__Content button[type="submit"] {
+    margin-bottom: 10px;
+}
+
+.ReactModal__Content button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0070f3;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.ReactModal__Content button:hover {
+    background-color: #0051a1;
+}
+
+.modal-close-button {
+    margin-top: 10px;
+}
+
+.ReactModal__Overlay .ReactModal__Content {
+    inset: auto !important;  /* This will reset the inset values */
+}
+
+.entry-hover:hover {
+    background-color: #e0e0e0; /* Change this color to the desired shade of grey */
+    cursor: pointer;
+}

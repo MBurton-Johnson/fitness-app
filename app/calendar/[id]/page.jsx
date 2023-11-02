@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import '/components/AddWeight/Calendar.css';
 import Modal from 'react-modal';
+import '/components/AddFood/AddWeightModal.css';
 
 export default function CreateProfile() {
   const { id } = useParams();
@@ -44,14 +45,17 @@ export default function CreateProfile() {
 
       if (response.ok) {
         console.log("Calendar updated successfully");
-        router.push('/');
+        fetchWeights();
+        // Clear the weight input field
+        setFormData({ ...formData, weight: "" }); 
       } else {
         console.error("Error updating user");
       }
     } catch (error) {
       console.error("Error updating user:", error);
     }
-  };
+};
+
 
   useEffect(() => {
     async function fetchUserData() {
@@ -67,21 +71,23 @@ export default function CreateProfile() {
     fetchUserData();
   }, [id]);
 
-  useEffect(() => {
-    async function fetchWeights() {
-      try {
+  const fetchWeights = async () => {
+    try {
         const response = await fetch(`http://localhost:3006/calendar/${id}`);
         let weightsData = await response.json();
-        weightsData = weightsData.sort((a, b) => new Date(b.date) - new Date(a.date));  // Sorting here
+        weightsData = weightsData.sort((a, b) => new Date(b.date) - new Date(a.date));
         setWeights(weightsData);
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching weights:', error);
-      }
     }
+};
+
+useEffect(() => {
     if (id) {
-      fetchWeights();
+        fetchWeights();
     }
-  }, [id]);
+}, [id]);
+
 
   const handleOpenWeightModal = (weight = {}) => {
     setCurrentWeight(weight);
@@ -95,17 +101,46 @@ export default function CreateProfile() {
   
   const handleWeightUpdate = async (e) => {
     e.preventDefault();
-    // Make API call to update the weight entry using currentWeight._id
-    // Fetch updated weights afterwards or update the local state to reflect changes.
-    // Close the modal afterwards.
+    try {
+        const response = await fetch(`http://localhost:3006/calendar/update/${currentWeight._id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ weight: currentWeight.weight }),
+        });
+
+        if (response.ok) {
+            console.log("Weight updated successfully");
+            fetchWeights();
+        } else {
+            console.error("Error updating weight");
+        }
+    } catch (error) {
+        console.error("Error updating weight:", error);
+    }
     handleCloseWeightModal();
-  };
+};
+
   
-  const handleDeleteWeight = async (weightId) => {
-    // Make API call to delete the weight entry using weightId.
-    // Fetch updated weights afterwards or update the local state to reflect changes.
-    handleCloseWeightModal();
-  };
+const handleDeleteWeight = async (weightId) => {
+  try {
+      const response = await fetch(`http://localhost:3006/calendar/delete/${weightId}`, {
+          method: "DELETE",
+      });
+
+      if (response.ok) {
+          console.log("Weight deleted successfully");
+          fetchWeights();
+      } else {
+          console.error("Error deleting weight");
+      }
+  } catch (error) {
+      console.error("Error deleting weight:", error);
+  }
+  handleCloseWeightModal();
+};
+
   
   return (
     <div className="flex flex-col items-center justify-start h-screen bg-gray-100">
@@ -159,7 +194,7 @@ export default function CreateProfile() {
           <div className="my-2 border-t border-gray-300 h-px"></div>
         )}
         <li className="mb-4 last:mb-0">
-        <div className="p-2 bg-gray-300" onClick={() => handleOpenWeightModal(weight)}> 
+        <div className="p-2 bg-gray-100 entry-hover" onClick={() => handleOpenWeightModal(weight)}>
             <div className="font-bold">
               {new Date(weight.date).toLocaleDateString('en-US', {
                 weekday: 'long',
@@ -176,8 +211,27 @@ export default function CreateProfile() {
   </ul>
 </div>
 
-<Modal isOpen={weightModalIsOpen} onRequestClose={handleCloseWeightModal} contentLabel="Weight Modal">
-  <h2>{currentWeight._id ? 'Update' : 'Add'} Weight</h2>
+<Modal
+  isOpen={weightModalIsOpen}
+  onRequestClose={handleCloseWeightModal}
+  contentLabel="Weight Modal"
+  style={{
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    content: {
+      position: 'relative',
+      width: '500px',
+      maxWidth: '90%',
+      padding: '20px',
+      backgroundColor: '#fff',
+      borderRadius: '5px',
+      outline: 'none',
+      boxShadow: '0 2px 15px rgba(0, 0, 0, 0.3)'
+    }
+  }}
+>
+<h2 className="font-bold text-2xl">{currentWeight._id ? 'Update' : 'Add'} Weight</h2>
   <form onSubmit={handleWeightUpdate}>
       <input
           type="number"
@@ -188,6 +242,7 @@ export default function CreateProfile() {
       <button type="submit">Update</button>
       <button onClick={() => handleDeleteWeight(currentWeight._id)}>Delete</button>
   </form>
+  <button className="modal-close-button" onClick={handleCloseWeightModal}>Close</button>
 </Modal>
 
     </div>
