@@ -16,13 +16,22 @@ export default function Nutrition() {
     const [foodCategory, setFoodCategory] = useState(null);  // 'breakfast', 'lunch', 'dinner', 'snack'
     const [totalCalories, setTotalCalories] = useState(0);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [goalCalories, setGoalCalories] = useState(0);
 
 useEffect(() => {
-    fetch(`http://localhost:3006/foods?userId=${userId}&today=true`)
-        .then(res => res.json())
-        .then(data => setFoods(data));
-    }, [userId]); // Fetch foods once when the component mounts and whenever userId changes
+    fetchUserData();
+}, []);
 
+const fetchUserData = async () => {
+    try {
+        const response = await fetch(`http://localhost:3006/users/one/${userId}`);
+        const userData = await response.json();
+        setGoalCalories(userData.goalCalories);
+    } catch (error) {
+        console.error('Failed to fetch user data:', error);
+    }
+};
+    
 useEffect(() => {
         const allCategories = ['breakfast', 'lunch', 'dinner', 'snacks'];
         let sum = 0;
@@ -124,8 +133,6 @@ useEffect(() => {
             .then(data => setFoods(data));
     };   
 
-    const goalCalories = 2000;
-
     const goToPreviousDay = () => {
         setCurrentDate(prevDate => {
             const newDate = new Date(prevDate);
@@ -165,7 +172,9 @@ useEffect(() => {
                 </div>
                 <div className="calorie-separator"> = </div>
                 <div className="calorie-item">
-                    <div>{goalCalories - totalCalories}</div>
+                    <div className={(goalCalories - totalCalories) > 0 ? "positive" : "negative"}>
+                        {goalCalories - totalCalories}
+                    </div>
                     <div>Remaining</div>
                 </div>
             </div>

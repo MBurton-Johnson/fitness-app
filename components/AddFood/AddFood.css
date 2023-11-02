@@ -135,3 +135,11 @@ h2 {
 .date-navigation button:hover {
     background-color: #e0e0e0; /* Darker gray background color on hover */
 }
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
