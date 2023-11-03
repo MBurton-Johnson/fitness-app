@@ -63,7 +63,7 @@ export default function UserInfo() {
         return (
             <div className="shadow-xl p-8 rounded-md mt-2 flex flex-col gap-3 bg-[#B6D6CC]">
                 <div className="flex items-center justify-center">
-                    <Image className="rounded-full" src={session?.user?.image} width={60} height={60} />
+                    <Image className="rounded-full" src={session?.user?.image} alt="Google Proifle Image" width={60} height={60} />
                 </div>
                 <div className="text-center">
                     <div className="font-bold text-lg">{session?.user?.name}</div>
