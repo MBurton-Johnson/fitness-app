@@ -61,7 +61,7 @@ export default function UserInfo() {
 
     if (status === "authenticated") {
         return (
-            <div className="shadow-xl p-8 rounded-md flex flex-col gap-3 bg-yellow-200">
+            <div className="shadow-xl p-8 rounded-md mt-2 flex flex-col gap-3 bg-[#B6D6CC]">
                 <div className="flex items-center justify-center">
                     <Image className="rounded-full" src={session?.user?.image} width={60} height={60} />
                 </div>
@@ -73,7 +73,7 @@ export default function UserInfo() {
                             <div>Gender: <span className="font-bold">{userData.gender}</span></div>
                             <div>Age: <span className="font-bold">{userData.age}</span></div>
                             <div>Height: <span className="font-bold">{userData.height}cm</span></div>
-                            <div>Starting Weight: <span className="font-bold">{userData.weight}KG</span></div>
+                            <div>Starting Weight: <span className="font-bold">{userData.weight}kg</span></div>
                             <div className="mt-2">
                                 <Link className="font-bold text-lg text-blue-700 block" href={`/profile/create/${userData._id}`}>Update Profile</Link>
                             </div>

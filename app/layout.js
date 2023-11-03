@@ -15,12 +15,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-        <div className='max-w-3xl mx-auto'>
-        <NavBar />
-        {children}
-        </div>
+          <NavBar />
+          <div className='max-w-3xl mx-auto'>
+            {children}
+          </div>
         </NextAuthProvider>
-        </body>
+      </body>
     </html>
   )
 }
+
