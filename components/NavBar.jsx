@@ -66,7 +66,7 @@ export default function NavBar() {
           </button>
         ) : (
           <button
-            className="bg-slate-900 text-white px-6 py-2 rounded-md"
+            className="bg-slate-900 text-blue px-6 py-2 rounded-md"
             onClick={() => signIn("google")}
           >
             Sign In

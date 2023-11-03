@@ -12,6 +12,30 @@ const Calendar = () => {
   const [isLoaded, setIsLoaded] = useState(false); // Add a flag to control data loading
   const [selectedWorkout, setSelectedWorkout] = useState(null); // State to store selected workout
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control the modal
+  const [currentDate, setCurrentDate] = useState(new Date()); // State for the currently displayed month
+
+  const handlePreviousMonth = () => {
+    // Create a copy of the current date
+    const newDate = new Date(currentDate);
+  
+    // Go to the previous month
+    newDate.setMonth(newDate.getMonth() - 1);
+  
+    // Update the state with the new date
+    setCurrentDate(newDate);
+  };
+  
+  const handleNextMonth = () => {
+    // Create a copy of the current date
+    const newDate = new Date(currentDate);
+  
+    // Go to the next month
+    newDate.setMonth(newDate.getMonth() + 1);
+  
+    // Update the state with the new date
+    setCurrentDate(newDate);
+  };
+
 
   const today = new Date();
   const currentYear = today.getFullYear();
@@ -73,6 +97,7 @@ const Calendar = () => {
     const weeks = [];
     let currentWeek = [];
     const daysInWeek = 7;
+    
 
     // Calculate the day of the week for the 1st day of the month
     const dayOfWeek = startDate.getDay();
@@ -118,12 +143,16 @@ const Calendar = () => {
 
   return (
     <div className="calendar">
+  
       <div className="month-header">
-        {getMonthName(currentMonth)} {currentYear}
+        {getMonthName(currentDate.getMonth())} {currentDate.getFullYear()}
       </div>
-      {renderWeeks()}
-      {isModalOpen && selectedWorkout && <WorkoutModal workout={selectedWorkout} onClose={() => setIsModalOpen(false)} />}
-    </div>
+    
+    {renderWeeks()}
+    {isModalOpen && selectedWorkout && (
+      <WorkoutModal workout={selectedWorkout} onClose={() => setIsModalOpen(false)} />
+    )}
+  </div>
   );
 };
 
