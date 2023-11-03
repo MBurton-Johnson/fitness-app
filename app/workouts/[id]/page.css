@@ -45,14 +45,14 @@ h2 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #f2f2f2; /* Background color for the square */
+    background-color: #b6d6cc; /* Background color for the square */
     border: 1px solid #ddd; 
     border-radius: 10%;
   }
   
   /* Optional: Hover effect to highlight the square on hover */
   .singleworkout:hover {
-    background-color: #e0e0e0;
+    background-color: #e4f1ed;
   }
   
   /* Ensure flex-wrap for the container */
