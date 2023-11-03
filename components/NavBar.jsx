@@ -26,7 +26,9 @@ export default function NavBar() {
     <>
       <div className="flex flex-col items-center pt-4 bg-[#2D4545]">
         <h1 className="flex items-center text-4xl font-bold text-white">
-          TrackTive
+          <div>
+          <span>Track</span><span className="text-[#F1FEC6]">Tive</span>
+          </div>
         </h1>
       </div>
       <div className="p-4 flex justify-between items-center bg-[#2D4545] text-white">
