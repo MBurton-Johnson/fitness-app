@@ -37,7 +37,7 @@ export default function Home() {
           setWeights(weightsData);
         } catch (error) {
           console.error('Error fetching weights:', error);
-        }
+        } 
       }
 
       fetchWeights();
@@ -107,7 +107,7 @@ export default function Home() {
       <UserInfo />
       <div className="mt-5 flex justify-center">
         {userData.goalCalories && (
-          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 mr-10 bg-[#B6D6CC]">
+          <div className="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 mr-10 bg-[#B6D6CC]">
             <h1 className="font-bold text-xl mb-5">Calories Target - {userData.goalCalories}kcal</h1>
             <div className="relative pt-1">
               <div className="flex justify-center items-center">
@@ -135,7 +135,7 @@ export default function Home() {
           </div>
         )}
         {recentWeight && (
-          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 bg-[#B6D6CC]">
+          <div className="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden w-full p-4 m-5 bg-[#B6D6CC]">
             <h1 className="font-bold text-xl mb-5">Weight Target - {userData.goalWeight}kg</h1>
             <div className="relative pt-1">
               <div className="flex justify-center items-center">
