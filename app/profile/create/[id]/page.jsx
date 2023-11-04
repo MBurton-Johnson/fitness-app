@@ -1,14 +1,14 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import { UseParams } from "next/navigation";
+import { UseState, UseEffect } from "react";
+import { UseRouter } from 'next/navigation';
 
 export default function createProfile() {
-  const { id } = useParams();
-  const router = useRouter();
+  const { id } = UseParams();
+  const router = UseRouter();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = UseState({
     gender: "Male",
     age: "",
     height: "",
@@ -17,10 +17,10 @@ export default function createProfile() {
     goalCalories: "",
   });
 
-  const [isWeightSet, setIsWeightSet] = useState(false);
+  const [isWeightSet, setIsWeightSet] = UseState(false);
 
 
-  useEffect(() => {
+  UseEffect(() => {
     // Fetch user data here based on the 'id'
     const fetchUserData = async () => {
       try {
