@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`http://localhost:3006/users/${session?.user?.email}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/${session?.user?.email}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {
@@ -32,7 +32,7 @@ export default function Home() {
     if (userData._id) {
       async function fetchWeights() {
         try {
-          const response = await fetch(`http://localhost:3006/calendar/${userData._id}`);
+          const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calendar/${userData._id}`);
           const weightsData = await response.json();
           setWeights(weightsData);
         } catch (error) {
@@ -48,7 +48,7 @@ export default function Home() {
     if (userData._id) {
       async function fetchTotalCalories() {
         try {
-          const response = await fetch(`http://localhost:3006/calories/total/${userData._id}`);
+          const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calories/total/${userData._id}`);
           const data = await response.json();
           setTotalCalories(data.totalCalories);
         } catch (error) {
@@ -64,7 +64,7 @@ export default function Home() {
     if (userData._id) {
       async function findMostRecentWeight() {
         try {
-          const response = await fetch(`http://localhost:3006/calendar/recent/${userData._id}`)
+          const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calendar/recent/${userData._id}`)
           const mostRecent = await response.json()
           setRecentWeight(mostRecent)
         } catch (error) {

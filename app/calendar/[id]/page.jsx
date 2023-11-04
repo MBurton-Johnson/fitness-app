@@ -32,7 +32,7 @@ export default function CreateProfile() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3006/calendar/new`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calendar/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function CreateProfile() {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`http://localhost:3006/users/one/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/one/${id}`);
         const data = await response.json();
         setUserData(data);
       } catch (error) {
@@ -73,7 +73,7 @@ export default function CreateProfile() {
 
   const fetchWeights = async () => {
     try {
-        const response = await fetch(`http://localhost:3006/calendar/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calendar/${id}`);
         let weightsData = await response.json();
         weightsData = weightsData.sort((a, b) => new Date(b.date) - new Date(a.date));
         setWeights(weightsData);
@@ -102,7 +102,7 @@ useEffect(() => {
   const handleWeightUpdate = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch(`http://localhost:3006/calendar/update/${currentWeight._id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calendar/update/${currentWeight._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ useEffect(() => {
   
 const handleDeleteWeight = async (weightId) => {
   try {
-      const response = await fetch(`http://localhost:3006/calendar/delete/${weightId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/calendar/delete/${weightId}`, {
           method: "DELETE",
       });
 

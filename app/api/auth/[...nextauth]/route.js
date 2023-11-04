@@ -14,7 +14,7 @@ export const authOptions = {
         console.log("Account: ", account);
         const {name, email} = user
         try {
-            const res = await fetch('http://localhost:3006/users/new', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/new`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

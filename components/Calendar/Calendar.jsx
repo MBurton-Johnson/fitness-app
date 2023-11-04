@@ -54,7 +54,7 @@ const Calendar = () => {
   };
   const fetchWorkouts = () => {
     // Simulated data fetch. Replace with your actual data fetching logic.
-    return fetch(`http://localhost:3006/workouts`, {
+    return fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/workouts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -19,7 +19,7 @@ export default function StartWorkoutModal({ workout, onClose }) {
   const handleSave = async () => {
     try {
       // Call the updateWorkoutToDatabase function to update the workout
-      const response = await fetch(`http://localhost:3006/workouts/${workout._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/workouts/${workout._id}`, {
         method: 'PUT',
         headers: {
         "Content-Type": "application/json",

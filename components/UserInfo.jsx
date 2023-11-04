@@ -26,7 +26,7 @@ export default function UserInfo() {
     useEffect(() => {
         async function fetchUserData() {
             try {
-                const response = await fetch(`http://localhost:3006/users/${session?.user?.email}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/${session?.user?.email}`);
                 const data = await response.json();
                 setUserData(data);
             } catch (error) {
@@ -42,7 +42,7 @@ export default function UserInfo() {
 
   const handleDeleteUser = async () => {
     try {
-      const response = await fetch(`http://localhost:3006/users/${userData._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/${userData._id}`, {
         method: 'DELETE',
       });
 

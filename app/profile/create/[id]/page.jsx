@@ -24,7 +24,7 @@ export default function createProfile() {
     // Fetch user data here based on the 'id'
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:3006/users/one/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/one/${id}`);
         if (response.ok) {
           const userData = await response.json();
           setFormData({
@@ -56,7 +56,7 @@ export default function createProfile() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3006/users/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

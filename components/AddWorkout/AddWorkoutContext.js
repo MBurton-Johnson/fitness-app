@@ -5,7 +5,7 @@ export async function addWorkoutToDatabase(requestData, id) {
       const { workoutName, exercises, cardio } = requestData.body;
   
       // Send a POST request to create a new workout
-      const createWorkoutResponse = await fetch(`http://localhost:3006/workouts/new/${id}`, {
+      const createWorkoutResponse = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/workouts/new/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

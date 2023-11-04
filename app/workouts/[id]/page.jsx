@@ -21,7 +21,7 @@ export default function WorkoutPage() {
   //   const [isStartWorkoutModalOpen, setIsStartWorkoutModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3006/workouts`, {
+    fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/workouts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

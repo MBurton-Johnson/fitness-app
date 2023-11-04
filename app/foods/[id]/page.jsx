@@ -24,7 +24,7 @@ useEffect(() => {
 
 const fetchUserData = async () => {
     try {
-        const response = await fetch(`http://localhost:3006/users/one/${userId}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/users/one/${userId}`);
         const userData = await response.json();
         setGoalCalories(userData.goalCalories);
     } catch (error) {
@@ -63,7 +63,7 @@ useEffect(() => {
             category: foodCategory
         };    
         if (currentFood._id) {
-            fetch(`http://localhost:3006/foods/${currentFood._id}`, {
+            fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/foods/${currentFood._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ useEffect(() => {
         } else {
 
 
-            fetch(`http://localhost:3006/foods/new/${userId}`, {
+            fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/foods/new/${userId}`, {
 
                 method: 'POST',
                 headers: {
@@ -94,7 +94,7 @@ useEffect(() => {
     } 
 
     const handleDeleteFood = (foodId) => {
-        fetch(`http://localhost:3006/foods/${foodId}`, {
+        fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/foods/${foodId}`, {
             method: 'DELETE',
         })
         .then(response => {
@@ -128,7 +128,7 @@ useEffect(() => {
 
     const fetchFoods = () => {
         const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
-        fetch(`http://localhost:3006/foods?userId=${userId}&date=${dateStr}`)
+        fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/foods?userId=${userId}&date=${dateStr}`)
             .then(res => res.json())
             .then(data => setFoods(data));
     };   

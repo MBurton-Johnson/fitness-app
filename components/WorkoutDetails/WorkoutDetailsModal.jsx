@@ -29,7 +29,7 @@ export default function WorkoutModal({ workout, onClose }) {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3006/workouts/${workout._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/workouts/${workout._id}`, {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",

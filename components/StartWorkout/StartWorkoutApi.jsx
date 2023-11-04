@@ -5,7 +5,7 @@ console.log(id)
       const { workoutDate, exercises, cardio } = requestData.body;
   
       // Send a PUT request to update the workout
-      const updateWorkoutResponse = await fetch(`http://localhost:3006/workouts/${id}`, {
+      const updateWorkoutResponse = await fetch(`${process.env.NEXT_PUBLIC_DATABASE_URL}/workouts/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
