@@ -19,7 +19,7 @@ export default function SignInBtn() {
         have the power to effortlessly input, organize, and track your fitness
         journey, all in one dynamic platform. From heart-pumping workouts to
         wholesome nutrition, our intuitive interface empowers you to seamlessly
-        store and monitor your progress. Whether you're a seasoned gym
+        store and monitor your progress. Whether youre a seasoned gym
         enthusiast or just starting out, TrackTive is designed to be your
         steadfast partner in achieving your health and fitness goals. Get ready
         to unlock your full potential, because with TrackTive, every rep, every
