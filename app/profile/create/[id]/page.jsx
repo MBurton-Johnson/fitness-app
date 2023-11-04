@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
-export default function createProfile() {
+export default function CreateProfile() {
   const { id } = useParams();
   const router = useRouter();
 
