@@ -78,7 +78,7 @@ export default function WorkoutPage() {
           <div className="workout-buttons">
             <button
               onClick={openCreateModal}
-              className="bg-blue-500 text-white px-6 py-2 rounded-md"
+              className="bg-[#707070] hover:bg-[#2D4545] text-white px-6 py-2 rounded-md"
             >
               Create New Workout
             </button>

@@ -37,6 +37,7 @@
 
 .ReactModal__Content button[type="submit"] {
     margin-bottom: 10px;
+    background-color: #707070;
 }
 
 .ReactModal__Content button {
@@ -44,17 +45,18 @@
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background-color: #0070f3;
+    background-color: #707070;
     color: #fff;
     transition: background-color 0.2s;
 }
 
 .ReactModal__Content button:hover {
-    background-color: #0051a1;
+    background-color: #2D4545;
 }
 
 .modal-close-button {
     margin-top: 10px;
+    background-color: #707070;
 }
 
 .ReactModal__Overlay .ReactModal__Content {

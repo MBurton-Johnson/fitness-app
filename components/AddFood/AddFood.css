@@ -22,15 +22,16 @@ h2 {
     font-size: 0.9em;
     padding: 8px 16px;
     margin: 20px 0;
-    background-color: #0070f3;
+    background-color: #707070;
     color: #fff;
     border: none;
     cursor: pointer;
     transition: background-color 0.2s;
+    border-radius: 0.25rem;
 }
 
 .add-button:hover {
-    background-color: #0051a1;
+    background-color: #2D4545;
 }
 
 .food-item {

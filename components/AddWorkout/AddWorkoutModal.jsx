@@ -182,7 +182,7 @@ export default function AddWorkoutModal({ onClose }) {
           ))}
           <div className="singlebutton">
           <button
-            className="bg-blue-500 text-white px-6 py-2 rounded-md"
+            className="bg-[#707070] hover:bg-[#2D4545] text-white px-6 py-2 rounded-md"
             onClick={handleAddExercise}
           >
             Add Exercise
@@ -225,7 +225,7 @@ export default function AddWorkoutModal({ onClose }) {
           ) : (
             <div className="singlebutton">
             <button
-              className="bg-blue-500 text-white px-6 py-2 rounded-md"
+              className="bg-[#707070] hover:bg-[#2D4545] text-white px-6 py-2 rounded-md"
               onClick={handleAddCardio}
             >
               Add Cardio
@@ -234,7 +234,7 @@ export default function AddWorkoutModal({ onClose }) {
           )}
           <div className="singlebutton">
             <button
-              className="bg-blue-500 text-white px-6 py-2 rounded-md"
+              className="bg-[#707070] hover:bg-[#2D4545] text-white px-6 py-2 rounded-md"
               onClick={handleSave}
             >
               Save Workout

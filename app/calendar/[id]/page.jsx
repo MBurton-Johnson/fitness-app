@@ -162,7 +162,7 @@ const handleDeleteWeight = async (weightId) => {
         onChange={handleInputChange}
     />
     <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/3 mt-2"  // Added w-1/3 and mt-4 for some top margin
+        className="bg-blue-500 hover:bg-[#2D4545] text-white font-bold py-2 px-4 rounded w-1/3 mt-2 bg-[#707070]"  // Added w-1/3 and mt-4 for some top margin
         onClick={handleSubmit}
     >
         Submit
